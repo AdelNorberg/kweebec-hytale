@@ -61,7 +61,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Alegreya+SC:400,400i,500,500i,700,700i,800,800i,900,900i');
+@import '../assets/var.scss';
 
 html {
   font-family: 'Helvetica Neue', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -73,7 +73,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  background-color: #10233F;
+  background-color: $primary-bg-1;
   color: white;
 }
 
@@ -134,12 +134,12 @@ a {
   justify-content: space-between;
   align-items: center;
   height: 3.5rem;
-  background-color: #1b304f;
+  background-color: $primary-bg-2;
   font-size: 25px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 2px #4e5765;
+  box-shadow: $shadow-bg;
   border-radius: 5px;
   position: relative;
-  border: 2px solid #15243a;
+  border: 2px solid $primary-bg-1;
   margin-bottom: 2rem;
   // :before {
   //   top: 0;
@@ -169,7 +169,7 @@ a {
 
 .add-news {
   font-size: 1.2rem;
-  color: #a5b9c6;
+  color: $secondary-color-2;
   font-weight: 600;
   margin-top: 0.45rem;
   margin-right: 1.2rem;
@@ -188,10 +188,10 @@ a {
   padding-left: 1rem;
   font-weight: 600;
   font-size: 1.5rem;
-  color: #a5b9c6;
+  color: $secondary-color-2;
   transition: 0.5s;
   &:hover {
-    color: #edb548;
+    color: $primary-color-2;
   } 
 }
 
@@ -202,7 +202,7 @@ a {
 .home-icon {
   height: 1.5rem;
   padding-top: 0.3rem;
-  color: #ecbc62;
+  color: $primary-color-2;
   font-size: 1.5rem;
   background: radial-gradient(ellipse at center, rgba(237, 181, 72, 0.1) 0%,
             rgba(237, 181, 72, 0.1) 20%, rgba(237, 181, 72, 0) 70%, rgba(237, 181, 72, 0) 100%);
@@ -217,7 +217,7 @@ a {
   padding: 0.1rem 1.2em 0 1.2em;
   margin-right: 0.2rem;
   border-radius: 5px;
-  border: 1px solid #a17f3c;
+  border: 1px solid $primary-color-1;
   background: linear-gradient(to bottom, #3583b4, #225b8b);
   box-sizing: border-box;
   box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);

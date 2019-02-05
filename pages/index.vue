@@ -100,6 +100,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/var.scss';
+
 .carousel-container {
   margin-top: 5rem;
 }
@@ -129,7 +131,7 @@ export default {
   border: 1px solid #534329;
   cursor: pointer;
   &:hover {
-    border-color: #edb548;
+    border-color: $primary-color-2;
   }
 }
 
@@ -148,7 +150,7 @@ export default {
   border: 1px solid #534329;
   cursor: pointer;
   &:hover {
-    border-color: #edb548;
+    border-color: $primary-color-2;
   }
 }
 
@@ -190,7 +192,7 @@ export default {
   height: 25rem;
   width: 18rem;
   background: #1B304F;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 2px #4e5765;
+  box-shadow: $shadow-bg;
   border-radius: 5px;
 }
 
@@ -215,7 +217,7 @@ export default {
 }
 
 .header-text {
-  background: linear-gradient(#ffe98d, #e19f27);
+  background: $primary-g;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -234,7 +236,7 @@ export default {
   margin-top: 0.6rem;
   margin-bottom: 0.4rem;
   height: 1px;
-  background: linear-gradient(#ffe98d, #e19f27);
+  background: $primary-g;
   width: 80%;
 }
 
@@ -255,7 +257,7 @@ export default {
   border: 1px solid #534329;
   cursor: pointer;
   &:hover {
-    border-color: #edb548;
+    border-color: $primary-color-2;
   }
 }
 

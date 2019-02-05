@@ -14,6 +14,8 @@
 </template>
 
 <style lang="scss" scoped>
+@import '../../assets/var.scss';
+
 .container {
   display: flex;
   flex-direction: row;
@@ -22,7 +24,7 @@
   width: 100%;
   height: 25rem;
   background: #1B304F;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 2px #4e5765;
+  box-shadow: $shadow-bg;
 }
 
 .cartoon {
@@ -40,13 +42,13 @@
 .gold {
   height: 1px;
   border: 0;
-  background: #715e2b;
+  background: $primary-color-1;
 }
 
 .name {
   font-size: 3.5rem;
   font-weight: 800;
-  background: linear-gradient(#f5fbff, #bfe6ff);
+  background: $secondary-g;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -60,7 +62,7 @@
 }
 
 .link-home {
-  color: #edb548;
+  color: $primary-color-2;
   font-weight: 600;
   &:hover {
     color: white;

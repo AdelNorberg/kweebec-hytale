@@ -9,10 +9,12 @@
       <div class="inputs-container">
         <div class="input-container">
           <label class="label">Никнейм</label>
+          <div class="fu"></div>
           <input class="input-in-container input" type="text" name="text" placeholder="Введите ник...">
         </div>
         <div class="input-container">
           <label class="label">Почта</label>
+          <div class="fu"></div>
           <input class="input-in-container input" type="text" name="email" placeholder="Введите почту...">
         </div>
       </div>
@@ -38,6 +40,8 @@ export default {
 
 
 <style lang="scss" scoped>
+@import '../../assets/var.scss';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -45,8 +49,8 @@ export default {
   justify-content: center;
   min-height: 40rem;
   max-width: 100%;
-  background: #1B304F;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 2px #4e5765;
+  background: $primary-bg-2;
+  box-shadow: $shadow-bg;
   border-radius: 5px;
 }
 
@@ -76,7 +80,7 @@ export default {
 
 .label {
   margin-bottom: .5em;
-  color: #b7cedd;
+  color: $secondary-color-1;
 }
 
 .input {
@@ -87,7 +91,7 @@ export default {
   background: #0c1523;
   box-sizing: border-box;
   font-size: .9em;
-  color: #b7cedd;
+  color: $secondary-color-1;
   transition: border 0.2s, background 0.2s, box-shadow 0.2s, color 0.2s;
   width: 100%;
 }
@@ -110,7 +114,7 @@ export default {
 
 .header {
   position: relative;
-  background: linear-gradient(#ebf7ff, #c8e9ff);
+  background: $secondary-g;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
@@ -118,12 +122,12 @@ export default {
   text-align: center;
   transition: 0.5s;
   &:nth-child(1):hover {
-    background: linear-gradient(#ffe98d, #e19f27);
+    background: $primary-g;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   &:nth-child(2) {
-    background: linear-gradient(#ffe98d, #e19f27);
+    background: $primary-g;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -146,7 +150,7 @@ export default {
   margin-right: 0.2rem;
   margin-top: 1rem;
   border-radius: 5px;
-  border: 1px solid #a17f3c;
+  border: 1px solid $primary-color-1;
   background: linear-gradient(to bottom, #3583b4, #225b8b);
   box-sizing: border-box;
   box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
@@ -154,5 +158,9 @@ export default {
   &:hover {
     background: linear-gradient(to bottom, #4c8db6, hsl(207, 59%, 36%));
   }
+}
+
+.fu {
+  height: 0.5rem;
 }
 </style>
