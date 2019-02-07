@@ -4,11 +4,11 @@
     <div class="info">
       <div class="name">Упс... 404</div>
       <hr class="gold" />
-      <div class="text">Этот раздел пока недоступен, &nbsp;
+      <div class="text">Этот раздел пока недоступен, ожидай релиза игры. &nbsp;
         <nuxt-link to="/">
-            <div class="link-home"> возвращайся на главную</div>
+            <div class="link-home"> Вернуться на главную </div>
         </nuxt-link>
-      .</div>
+      ?</div>
     </div>
   </div>
 </template>

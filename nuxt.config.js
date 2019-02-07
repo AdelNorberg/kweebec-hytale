@@ -35,7 +35,7 @@ module.exports = {
   */
  plugins: [
     { src: '~/plugins/mavon-editor', mode: 'client' },
-    { src: '~/plugins/vuelidate', mode: 'client' }
+    { src: '~/plugins/simple-vue-validator', mode: 'client' }
   ],   
   /*
   ** Nuxt.js modules

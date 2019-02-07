@@ -4,15 +4,26 @@
       <div class="header">Авторизация</div>
       <nuxt-link class="header" to="/signup">Регистрация</nuxt-link>
     </div>
-    <form action="" class="form">
+    <form action="" class="form" @submit.prevent="submit">
       <hr class="gold" />
       <label class="label">Почта</label>
-      <input class="input" type="text" name="email" placeholder="Введите почту...">
+      <input 
+        v-model.trim="email"
+        class="input" 
+        type="text" 
+        name="email" 
+        placeholder="Введите почту...">
+
       <label class="label">Пароль</label>
-      <input class="input" type="password" placeholder="Введите пароль...">
+      <input 
+        v-model.trim="password"
+        type="password" 
+        placeholder="Введите пароль..."
+        class="input">
       <div class="box-button">
         <button class="button">Отправить</button>
       </div>
+
     </form>
   </div>
 </template>
@@ -21,6 +32,13 @@
 export default {
   data() {
     return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    submit() {
+      this.$store.dispatch('auth/signin', {email: this.email, password: this.password})
     }
   }
 }

@@ -100,7 +100,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/var.scss';
+@import '~assets/var.scss';
 
 .carousel-container {
   margin-top: 5rem;
@@ -126,7 +126,7 @@ export default {
 .preview-image {
   height: 25rem;
   width: 45rem;
-  background: url("./../static/hytale/screenshots/2.jpg") no-repeat;
+  background: url("/hytale/screenshots/2.jpg") no-repeat;
   background-size: 100%;
   border: 1px solid #534329;
   cursor: pointer;
@@ -144,7 +144,7 @@ export default {
 .preview-image-mini {
   height: 11rem;
   width: 20rem;
-  background: url("./../static/hytale/screenshots/8.jpg") no-repeat;
+  background: url("/hytale/screenshots/8.jpg") no-repeat;
   background-size: 100%;
   position: relative;
   border: 1px solid #534329;
@@ -157,7 +157,7 @@ export default {
 .preview-image-mini:nth-child(2) {
   height: 11rem;
   width: 20rem;
-  background: url("./../static/hytale/screenshots/5.jpg") no-repeat;
+  background: url("/hytale/screenshots/5.jpg") no-repeat;
   background-size: 100%;
 }
 
@@ -262,27 +262,27 @@ export default {
 }
 
 .hooper-slide:nth-child(1) {
-  background: url("./../static/hytale/screenshots/9.jpg") no-repeat;
+  background: url("/hytale/screenshots/9.jpg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(2) {
-  background: url("./../static/hytale/screenshots/8.jpg") no-repeat;
+  background: url("/hytale/screenshots/8.jpg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(3) {
-  background: url("./../static/hytale/screenshots/11.jpg") no-repeat;
+  background: url("/hytale/screenshots/11.jpg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(4) {
-  background: url("./../static/hytale/screenshots/10.jpg") no-repeat;
+  background: url("/hytale/screenshots/10.jpg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(5) {
-  background: url("./../static/hytale/screenshots/12.jpg") no-repeat;
+  background: url("/hytale/screenshots/12.jpg") no-repeat;
   background-size: 100%;
 }
 

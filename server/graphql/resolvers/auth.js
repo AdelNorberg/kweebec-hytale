@@ -18,7 +18,8 @@ module.exports = {
 
       const user = new User({
         email: args.email,
-        password: hashedPassword
+        password: hashedPassword,
+        nickname: args.nickname
       });
 
       await user.save();

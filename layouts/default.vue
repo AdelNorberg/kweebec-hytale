@@ -44,6 +44,9 @@
 import home from "../assets/home.vue"
 
 export default {
+  created() {
+    this.$store.dispatch('auth/isLogin')
+  },
   components: {
     home
   },

@@ -4,24 +4,28 @@
       <nuxt-link class="header" to="/signin">Авторизация</nuxt-link>
       <div class="header">Регистрация</div>
     </div>
-    <form action="" class="form">
+    <form action="" class="form" @submit.prevent="submit">
       <hr class="gold" />
       <div class="inputs-container">
         <div class="input-container">
           <label class="label">Никнейм</label>
           <div class="fu"></div>
-          <input class="input-in-container input" type="text" name="text" placeholder="Введите ник...">
+          <input class="input-in-container input" type="text" name="text" placeholder="Введите ник..." v-model.trim="name">
         </div>
+        
         <div class="input-container">
           <label class="label">Почта</label>
           <div class="fu"></div>
-          <input class="input-in-container input" type="text" name="email" placeholder="Введите почту...">
+          <input class="input-in-container input" type="text" name="email" placeholder="Введите почту..." v-model.trim="email">
         </div>
       </div>
+
       <label class="label">Пароль</label>
-      <input class="input" type="password" placeholder="Введите пароль...">
+      <input class="input" type="password" placeholder="Введите пароль..." v-model.trim="password">
+      
       <label class="label">Повторите пароль</label>
-      <input class="input" type="password" placeholder="Введите пароль...">
+      <input class="input" type="password" placeholder="Введите пароль..." v-model.trim="repeat">
+      
       <div class="box-button">
         <button class="button">Отправить</button>
       </div>
@@ -33,6 +37,17 @@
 export default {
   data() {
     return {
+      name: '',
+      email: '',
+      password: '',
+      repeat: ''
+    }
+  },
+  methods: {
+    submit() {
+      this.$store.dispatch('auth/signup', {
+        email: this.email, password: this.password, nickname: this.name
+      })
     }
   }
 }
@@ -98,10 +113,11 @@ export default {
 
 .input-container {
   &:nth-child(1) {
-    width: 50%
+    width: 45%
   }
   &:nth-child(2) {
-    margin-left: 2rem;
+    width: 45%;
+    margin-left: 3rem;
   }
 }
 
@@ -158,6 +174,10 @@ export default {
   &:hover {
     background: linear-gradient(to bottom, #4c8db6, hsl(207, 59%, 36%));
   }
+}
+
+.message {
+  text-align: center;
 }
 
 .fu {
