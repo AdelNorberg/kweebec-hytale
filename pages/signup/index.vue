@@ -47,6 +47,8 @@ export default {
     submit() {
       this.$store.dispatch('auth/signup', {
         email: this.email, password: this.password, nickname: this.name
+      }).then(() => {
+        this.$router.push('/')
       })
     }
   }

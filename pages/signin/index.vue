@@ -39,6 +39,9 @@ export default {
   methods: {
     submit() {
       this.$store.dispatch('auth/signin', {email: this.email, password: this.password})
+      .then(() => {
+        this.$router.push('/')
+      })
     }
   }
 }

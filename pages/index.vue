@@ -3,19 +3,25 @@
     <div class="preview-popular">
       <h1 class="preview-header">Популярное</h1>
       <div class="preview-container">
-        <div class="preview-image theme-box">
-          <h2 class="text-box">Вариативные отношения Hytale</h2>
-          <div class="theme"></div>
-        </div>
+        <nuxt-link to="/error">
+          <div class="preview-image theme-box">
+            <h2 class="text-box">Вариативные отношения Hytale</h2>
+            <div class="theme"></div>
+          </div>
+        </nuxt-link>
         <div class="preview-mini">
-          <div class="preview-image-mini">
-            <h3 class="text-box text-box-mini">Серверные настройки</h3>
-            <div class="theme"></div>
-          </div>
-          <div class="preview-image-mini">
-            <h3 class="text-box text-box-mini">Графика в Hytale</h3>
-            <div class="theme"></div>
-          </div>
+          <nuxt-link to="/error">
+            <div class="preview-image-mini">
+              <h3 class="text-box text-box-mini">Серверные настройки</h3>
+              <div class="theme"></div>
+            </div>
+          </nuxt-link>
+          <nuxt-link to="/error">
+            <div class="preview-image-mini">
+              <h3 class="text-box text-box-mini">Графика в Hytale</h3>
+              <div class="theme"></div>
+            </div>
+          </nuxt-link>
         </div>
         <div class="bar">
           <div class="bar-header">Последние статьи</div>

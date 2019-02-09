@@ -4,7 +4,7 @@
     <div class="info">
       <div class="name">Упс... 404</div>
       <hr class="gold" />
-      <div class="text">Этот раздел пока недоступен, ожидай релиза игры. &nbsp;
+      <div class="text">Этот раздел отсутствует или он пока недоступен. &nbsp;
         <nuxt-link to="/">
             <div class="link-home"> Вернуться на главную </div>
         </nuxt-link>
@@ -14,7 +14,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import '../../assets/var.scss';
+@import '~assets/var.scss';
 
 .container {
   display: flex;
@@ -29,7 +29,7 @@
 
 .cartoon {
   margin-top: 4rem;
-  background: url("../../static/images/mage-warrior.png") no-repeat;
+  background: url("~static/images/mage-warrior.png") no-repeat;
   background-size: contain;
   height: 20rem;
   width: 25rem;
