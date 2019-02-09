@@ -14,6 +14,10 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  posts: {
+    type: [Schema.Types.ObjectId],
+    default: []
+  },
   role: {
     type: String,
     default: 'user'
