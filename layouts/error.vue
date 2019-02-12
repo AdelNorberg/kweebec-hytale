@@ -22,9 +22,10 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 25rem;
   background: #1B304F;
   box-shadow: $shadow-bg;
+  border: 2px solid $primary-bg-1; 
+  min-height: 40rem;
 }
 
 .cartoon {

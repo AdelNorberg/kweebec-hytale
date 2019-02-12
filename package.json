@@ -4,6 +4,10 @@
   "description": "My beautiful Nuxt.js project",
   "author": "Adel",
   "private": true,
+  "nuxt": {
+    "host": "0.0.0.0",
+    "port": "3000"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
     "build": "nuxt build",
@@ -33,6 +37,7 @@
   "devDependencies": {
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "vuetable-2": "^1.7.5"
   }
 }

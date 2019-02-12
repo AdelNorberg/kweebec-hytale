@@ -34,8 +34,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
  plugins: [
-    { src: '~/plugins/mavon-editor', mode: 'client' },
-    { src: '~/plugins/simple-vue-validator', mode: 'client' }
+    '~/plugins/mavon-editor'
   ],   
   /*
   ** Nuxt.js modules

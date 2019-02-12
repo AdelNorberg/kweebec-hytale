@@ -18,7 +18,7 @@
           <nuxt-link to="/addNews">
             <div class="add-news">Добавить новость</div>
           </nuxt-link>
-          <div class="sign-button"><nuxt-link to="signin" class="sign">Войти</nuxt-link></div>
+          <div class="sign-button"><nuxt-link to="signin">Войти</nuxt-link></div>
         </div>
       </nav>
       <nuxt />
@@ -240,6 +240,7 @@ a {
   background-color: #10161E;
   box-shadow: inset 0 0 0 1px #2c2b22;
   border-radius: 5px;
+  color: rgba(183, 206, 221, 0.3);
 }
 
 .following-box {

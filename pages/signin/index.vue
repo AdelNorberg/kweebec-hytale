@@ -6,6 +6,7 @@
     </div>
     <form action="" class="form" @submit.prevent="submit">
       <hr class="gold" />
+      
       <label class="label">Почта</label>
       <input 
         v-model.trim="email"
@@ -23,7 +24,6 @@
       <div class="box-button">
         <button class="button">Отправить</button>
       </div>
-
     </form>
   </div>
 </template>
