@@ -13,6 +13,9 @@
           <nuxt-link v-for="(item, key) in routers" :to="'/' + item.router" :key="key" class="nav-bar-list">
             {{ item.name }}
           </nuxt-link>
+          <nuxt-link to="/moderation" class="nav-bar-list">
+            Модерация
+          </nuxt-link>
         </div>
         <div class="nav-right-box">
           <nuxt-link to="/addNews">

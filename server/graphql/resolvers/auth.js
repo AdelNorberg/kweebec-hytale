@@ -6,7 +6,15 @@ module.exports = {
     req.session.destroy()
     return true
   },
-  isLogin: async (args, req) => req.session.userID !== undefined ? true : false,
+  isLogin: async (args, req) => {
+    if(req.session.userID === undefined) {
+      return false
+    }
+
+    const profile = await User.findById(req.session.userID);
+    console.log(profile)
+    return profile
+  },
   signup: async (args, req) => {
     try {
       const existingUser = await User.findOne({ email: args.email });
@@ -15,18 +23,16 @@ module.exports = {
       }
 
       const hashedPassword = await bcrypt.hash(args.password, 12);
-
       const user = new User({
         email: args.email,
         password: hashedPassword,
         nickname: args.nickname
       });
-
+ 
       await user.save();
 
-      req.session.userID = {
-        ...user._doc._id
-      };
+      req.session.userID = user._doc._id;
+      req.session.userRole = user._doc.role;
 
       return user;
     } catch (err) {
@@ -41,6 +47,7 @@ module.exports = {
     if (user) {
       if (await bcrypt.compareSync(password, user.password)) {
         req.session.userID = user._doc._id;
+        req.session.userRole = user._doc.role;
 
         return { ...user._doc };
       }

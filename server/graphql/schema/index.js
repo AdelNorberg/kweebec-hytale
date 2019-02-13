@@ -6,6 +6,7 @@ scalar Date
 type AuthData {
   email: String!
   nickname: String!
+  role: String!
 }
 
 type Post {
@@ -18,13 +19,15 @@ type Post {
   view: Int!
   created: Date!
 }
-
 type RootQuery {
-  isLogin: Boolean!
+  isLogin: AuthData
   logout: Boolean!
 }
 
 type RootMutation {
+  approvePost(name: String!): Boolean
+  deletePost(name: String!): Boolean
+  getPosts(quantity: Int!): [Post!]!
   addPost(name: String!, category: String!, cover: String!, description: String!, content: String!): Post!
   signup(email: String!, password: String!, nickname: String!): AuthData!
   login(email: String!, password: String!): AuthData!

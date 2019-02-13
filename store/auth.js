@@ -50,12 +50,11 @@ export const actions = {
       url: 'http://localhost:3000/graphql',
       method: 'post',
       data: {
-        query: `query {
-            isLogin
-          }`
+        query: `{ isLogin {email, nickname, role}}`
       }
     }).then(({ data }) => {
-      commit('changeProfile', {isLogin: data.data.isLogin})
+      console.log(data)
+      commit('changeProfile', {isLogin: true, profileData: data.data.isLogin })
     })
   },
   logout () {
@@ -63,9 +62,7 @@ export const actions = {
       url: 'http://localhost:3000/graphql',
       method: 'get',
       data: {
-        query: `{
-            logout
-          }`
+        query: `{ logout }`
       }
     }).then(({ data }) => {
       if(data.data.logout) {
