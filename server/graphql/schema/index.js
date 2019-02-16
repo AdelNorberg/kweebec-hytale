@@ -18,10 +18,10 @@ type Post {
   cover: String!
   view: Int!
   created: Date!
-}
+} 
 type RootQuery {
   isLogin: AuthData
-  logout: Boolean!
+  logout: Boolean
 }
 
 type RootMutation {

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const state = () => ({
   isLogin: false,
-  profileData: null
+  profileData: {role: 'noname'}
 })
 
 export const mutations = {
@@ -21,7 +21,9 @@ export const actions = {
         query: `
           mutation {
             login(email: "${payload.email}", password: "${payload.password}") {
-              nickname
+              nickname,
+              role,
+              email
             }
           }`
       }
@@ -37,7 +39,9 @@ export const actions = {
         query: `
           mutation {
             signup(email: "${payload.email}", password: "${payload.password}", nickname: "${payload.nickname}") {
-              nickname
+              nickname,
+              role,
+              email
             }
           }`
       }
@@ -53,21 +57,19 @@ export const actions = {
         query: `{ isLogin {email, nickname, role}}`
       }
     }).then(({ data }) => {
-      console.log(data)
       commit('changeProfile', {isLogin: true, profileData: data.data.isLogin })
     })
   },
-  logout () {
+  logout ({commit}) {
     axios({
       url: 'http://localhost:3000/graphql',
-      method: 'get',
+      method: 'post',
       data: {
         query: `{ logout }`
       }
-    }).then(({ data }) => {
-      if(data.data.logout) {
-        commit('changeProfile', {isLogin: !data.data.logout})
-      }
+    }).then(() => {
+      commit('changeProfile', {isLogin: false, profileData: {role: 'noname'}})
     })
   }
 }
+

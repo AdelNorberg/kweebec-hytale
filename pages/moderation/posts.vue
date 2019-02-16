@@ -1,10 +1,10 @@
 <template>
   <div class="moderation">
     <div class="tab-nav">
-      <div class="tab">Модерация</div>
-      <nuxt-link class="tab" to="/moderation/posts">
-        Посты
+      <nuxt-link class="tab" to="/moderation">
+        Модерация
       </nuxt-link>
+      <div class="tab">Посты</div>
     </div>
     <div v-if="!getPosts" class="loader">
       <span></span>
@@ -17,8 +17,7 @@
         <div class="name">{{ item.name }}</div>
         <div class="category">{{ item.category }}</div>
         <div class="date">{{ item.created.substr(0,10) }}</div>
-        <div class="approve" @click="approvePost(item.name, key)">Одобрить</div>
-        <div class="view" @click="viewPost(item.name, key)">Посмотреть</div>
+        <div class="view">Посмотреть</div>
         <div class="delete" @click="deletePost(item.name, key)">Удалить</div>
       </div>
     </div>
@@ -27,6 +26,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      tabs: ['Модерация', 'Посты']
+    }
+  },
   mounted() {
     this.$store.dispatch('post/getPosts', 15)
   },
@@ -38,12 +42,6 @@ export default {
   methods: {
     deletePost(name, key) {
       this.$store.dispatch('post/deletePost', { name, key })
-    },
-    approvePost(name, key) {
-      this.$store.dispatch('post/approvePost', { name, key })
-    },
-    viewPost(name, key) {
-      this.$store.dispatch('post/viewPost', { name, key })
     }
   }
 }
@@ -77,7 +75,7 @@ export default {
 .tab {
   color: $secondary-color-2;
   padding: 0 1.5rem 0 1.5rem;
-  &:first-child {
+  &:nth-child(2) {
     color: $primary-color-2
   }
   &:hover {
@@ -102,7 +100,7 @@ export default {
 }
 
 .name {
-  width: 35%;
+  width: 50%;
 }
 
 .category {
@@ -113,7 +111,7 @@ export default {
   width: 10%;
 }
 
-.view, .approve, .delete{
+.view, .delete{
   width: 10%;
   font-weight: 500;
   cursor: pointer;
@@ -123,11 +121,6 @@ export default {
 .view {
   color: #17afdd;
 }
-
-.approve {
-  color: hsl(143, 75%, 46%);
-}
-
 .delete {
   color: hsl(350, 81%, 48%);
 }

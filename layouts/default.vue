@@ -13,30 +13,43 @@
           <nuxt-link v-for="(item, key) in routers" :to="'/' + item.router" :key="key" class="nav-bar-list">
             {{ item.name }}
           </nuxt-link>
-          <nuxt-link to="/moderation" class="nav-bar-list">
+          <nuxt-link v-if="getProfileData.role === 'admin' ? true : false" to="/moderation" class="nav-bar-list">
             Модерация
           </nuxt-link>
         </div>
         <div class="nav-right-box">
-          <nuxt-link to="/addNews">
-            <div class="add-news">Добавить новость</div>
-          </nuxt-link>
-          <div class="sign-button"><nuxt-link to="signin">Войти</nuxt-link></div>
+          <div v-if="!isLogin" class="sign-button">
+            <nuxt-link to="signin">Войти</nuxt-link>
+          </div>
+          <div v-if="isLogin" class="auth-box">
+            <nuxt-link to="/addNews">
+              <div class="add-news">Добавить новость</div>
+            </nuxt-link>
+            <profile class="profile-icon"/>
+            <div class="profile">  
+              {{ getProfileData.nickname }}
+            </div>
+            <div @click="onLogout" class="logout">Выйти</div>
+          </div>
         </div>
-      </nav>
+      </nav>  
       <nuxt />
       <footer class="footer">
         <div class="footer-info">
           ©2019 hytale-kweebec.ru
         </div>
         <div class="following-box">
-          <a href=""></a>
-          <span class="separator"></span>
-          <a href="">a</a>
-          <span class="separator"></span>
-          <a href="">s</a>
-          <span class="separator"></span>
-          <a href="">d</a>
+          <div class="footer-following-text">Подпишись на нас:</div>
+          <div>
+            <span class="separator"></span>
+            <a href="https://vk.com/hytale_kweebec"  target="_blank">
+              <vk class="vk"/>
+            </a> 
+            <span class="separator"></span>
+            <a href="https://www.youtube.com/channel/UCvomqzJ4iFyOby2zWJKgZCA" target="_blank">
+              <youtube class="youtube"/>
+            </a> 
+          </div>
         </div>
       </footer>
     </div>
@@ -44,14 +57,20 @@
 </template>
 
 <script>
-import home from "../assets/home.vue"
+import vk from '~/assets/vk'
+import youtube from '~/assets/youtube'
+import home from "~/assets/home.vue"
+import profile from "~/assets/profile.vue"
 
 export default {
   created() {
     this.$store.dispatch('auth/isLogin')
   },
   components: {
-    home
+    home,
+    profile,
+    vk,
+    youtube
   },
   data() {
     return {
@@ -62,12 +81,26 @@ export default {
         { name: 'Текстуры', router: 'error' }
       ]
     }
+  },
+  computed: {
+    isLogin() {
+      return this.$store.state.auth.isLogin
+    },
+    getProfileData() {
+      return this.$store.state.auth.profileData
+    }
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch('auth/logout')
+    }
   }
 }
 </script>
 
 <style lang="scss">
-@import '../assets/var.scss';
+@import '~assets/var.scss';
+@import '~assets/tag.scss';
 
 html {
   font-family: 'Helvetica Neue', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
@@ -79,7 +112,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  background-color: $primary-bg-1;
   color: white;
 }
 
@@ -88,6 +120,10 @@ html {
 *:after {
   box-sizing: border-box;
   margin: 0;
+}
+
+body {
+  background-color: #15243a;
 }
 
 a {
@@ -104,7 +140,7 @@ a {
   display: flex;
   justify-content: center;
   min-width: 1440px;
-  background: url("./../static/Hytale/bg.webp") no-repeat, url("./../static/Hytale/footer.webp") no-repeat;
+  background: url("/Hytale/new-bg.webp") no-repeat;
   background-size: 115%;
 }
 
@@ -127,7 +163,7 @@ a {
 .header-kweebec {
   height: 8rem;
   width: 10rem;
-  background: url("./../static/images/kweebec.png") no-repeat;
+  background: url("/images/kweebec.png") no-repeat;
   background-size: 100%;
 }
 
@@ -173,16 +209,43 @@ a {
   // }
 }
 
+.auth-box {
+  display: flex;
+}
+
 .add-news {
   font-size: 1.2rem;
   color: $secondary-color-2;
   font-weight: 600;
-  margin-top: 0.45rem;
   margin-right: 1.2rem;
   transition: 0.5s;
   &:hover {
     color: #edb548;
   } 
+}
+
+.profile-icon {
+  margin-top: 0.3rem;
+  margin-right: 0.7rem;
+}
+
+
+.profile {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-right: 1.4rem;
+  margin-top: 0.15rem;
+}
+
+.logout {
+  font-size: 1.2rem;
+  margin-right: 1.9rem;
+  font-weight: 500;
+  color: #e43d59;
+  cursor: pointer;
+  &:hover {
+    color: rgb(235, 17, 53);
+  }
 }
 
 .nav-lists {
@@ -203,6 +266,8 @@ a {
 
 .nav-right-box {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-icon {
@@ -262,7 +327,21 @@ a {
   height: 20px;
   background: #32372b;
   vertical-align: middle;
+  margin-top: -0.5rem;
   font-size: 1.2em;
   line-height: 70px;
+}
+
+.vk {
+  margin-right: 0.7rem;
+}
+
+.youtube {
+  margin-left: 0.4rem;
+  padding-top: 0.4rem;
+}
+
+.footer-following-text {
+  color: rgba(183, 206, 221, 0.3);
 }
 </style>

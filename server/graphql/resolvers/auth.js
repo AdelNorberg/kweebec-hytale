@@ -12,7 +12,6 @@ module.exports = {
     }
 
     const profile = await User.findById(req.session.userID);
-    console.log(profile)
     return profile
   },
   signup: async (args, req) => {

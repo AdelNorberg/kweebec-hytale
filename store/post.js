@@ -10,6 +10,9 @@ export const mutations = {
   },
   deletePost (state, key) {
     state.posts.splice(key, 1)
+  },
+  approvePost (state, key) {
+    state.posts.splice(key, 1)
   }
 }
 
@@ -74,6 +77,28 @@ export const actions = {
       }
     }).then(() => {
       commit('deletePost', key)
+    })
+  },
+  approvePost ({commit}, {name, key})  {
+    axios({
+      url: 'http://localhost:3000/graphql',
+      method: 'post',
+      data: {
+        query: `mutation {approvePost(name: "${name}")}`
+      }
+    }).then(() => {
+      commit('approvePost', key)
+    })
+  },
+  viewPost ({commit}, {name, key})  {
+    axios({
+      url: 'http://localhost:3000/graphql',
+      method: 'post',
+      data: {
+        query: `mutation {viewPost(name: "${name}")}`
+      }
+    }).then(() => {
+      commit('viewPost', key)
     })
   }
 }

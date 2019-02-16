@@ -34,7 +34,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
  plugins: [
-    '~/plugins/mavon-editor'
+    {src: '~plugins/mavon-editor', ssr: false }
   ],   
   /*
   ** Nuxt.js modules

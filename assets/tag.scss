@@ -1,0 +1,23 @@
+
+h2 {
+  background: linear-gradient(#ffe98d, #e19f27);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  color: #ecbc62;
+  margin-top: 2rem;
+}
+
+img {
+  width: 100%;
+  border: 1px solid #473e26;
+  max-height: 45rem;
+}
+
+p {
+  color: #b7cedd;
+  line-height: 1.5em;
+  margin-top: 1rem;
+  font-size: 1.05rem;
+}
