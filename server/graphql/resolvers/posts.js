@@ -8,8 +8,8 @@ module.exports = {
       throw new Error("Авторизуйтесь")
     }
     
-    const existingPost = await User.findOne({ name: args.name });
-
+    const existingPost = await Post.findOne({ name: args.name });
+    
     if (existingPost) {
       throw new Error("Такое имя поста уже существует")
     }
@@ -29,7 +29,6 @@ module.exports = {
     await post.save();  
     await user.save();
 
-    console.log(user)
     return post;
   },
   getPosts: async (args, req) => {

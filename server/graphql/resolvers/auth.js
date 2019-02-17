@@ -1,18 +1,24 @@
 const bcrypt = require("bcryptjs");
 const User = require("../../models/user");
+const { errorName } = require("../../constants/errors");
 
 module.exports = {
   logout: async (args, req) => {
     req.session.destroy()
     return true
   },
-  isLogin: async (args, req) => {
-    if(req.session.userID === undefined) {
-      return false
-    }
+  isLogin: async (args, req, res) => {
+    try {
+      if(req.session.userID === undefined) {
+        throw new Error(errorName.UNAUTHORIZED)
+      }
+  
+      const profile = await User.findById(req.session.userID);
+      return profile
 
-    const profile = await User.findById(req.session.userID);
-    return profile
+    } catch (err) {
+      throw err.message;
+    }
   },
   signup: async (args, req) => {
     try {

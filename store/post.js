@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { ADD_POST } from '~api/mutation'
+import { print } from 'graphql'
 
 export const state = () => ({
   posts: null
@@ -17,26 +19,19 @@ export const mutations = {
 }
 
 export const actions = {
-  addPost ({commit}, {name, category, cover, description, content}) {
+  addPost ({commit}, payload) {
     axios({
-      url: 'http://localhost:3000/graphql',
       method: 'post',
+      url: 'http://localhost:3000/graphql',
+      variables: {
+        name: payload.name,
+        category: payload.category,
+        cover: payload.cover,
+        description: payload.description,
+        content: payload.content
+      },
       data: {
-        query: `
-            mutation {
-              addPost(name: "${name}", category: "${category}", cover: "${cover}", 
-                      description: "${description}", content: "${content}") 
-              {
-                content
-                description
-                name
-                view
-                category
-                cover
-                creator
-                created
-              }
-            }`
+        query: print(ADD_POST)
       }
     })
     .then(() => {

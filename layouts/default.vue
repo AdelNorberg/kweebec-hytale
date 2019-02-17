@@ -18,9 +18,11 @@
           </nuxt-link>
         </div>
         <div class="nav-right-box">
-          <div v-if="!isLogin" class="sign-button">
-            <nuxt-link to="signin">Войти</nuxt-link>
-          </div>
+          <nuxt-link v-if="!isLogin"  to="signin">
+            <div class="sign-button">
+              Войти
+            </div>
+          </nuxt-link>
           <div v-if="isLogin" class="auth-box">
             <nuxt-link to="/addNews">
               <div class="add-news">Добавить новость</div>
