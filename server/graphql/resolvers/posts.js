@@ -39,6 +39,14 @@ module.exports = {
     const posts = await Post.find({}).limit(args.quantity)
     return posts;
   },
+  getSuccessPosts: async (args, req) => {
+    if(args.quantity > 15) {
+      throw new Error("Превышено кол-во запрашиваемоего.");
+    }
+    
+    const posts = await SuccessPost.find({category: args.category}).limit(args.quantity)
+    return posts;
+  },
   deletePost: async (args, req) => {
     if(req.session.userRole !== "admin") {
       throw new Error("Нет прав.");

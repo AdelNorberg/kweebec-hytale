@@ -19,12 +19,14 @@ type Post {
   view: Int!
   created: Date!
 } 
+
 type RootQuery {
   isLogin: AuthData
   logout: Boolean
 }
 
 type RootMutation {
+  getSuccessPosts(category: String!, quantity: Int!): [Post!]!
   approvePost(name: String!): Boolean
   deletePost(name: String!): Boolean
   getPosts(quantity: Int!): [Post!]!

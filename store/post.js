@@ -1,37 +1,28 @@
 import axios from 'axios'
-import { ADD_POST } from '~api/mutation'
+import { ADD_POST, GET_POSTS, GET_SUCCESS_POSTS } from '~/api/mutation'
 import { print } from 'graphql'
+import config from '~/config'
 
 export const state = () => ({
   posts: null
 })
 
 export const mutations = {
-  savePosts (state, posts) {
-    state.posts = posts
-  },
-  deletePost (state, key) {
-    state.posts.splice(key, 1)
-  },
-  approvePost (state, key) {
-    state.posts.splice(key, 1)
-  }
+  savePosts: (state, posts) => state.posts = posts, 
+  deletePost: (state, key) => state.posts.splice(key, 1),
+  approvePost: (state, key) => state.posts.splice(key, 1)
 }
 
 export const actions = {
   addPost ({commit}, payload) {
-    axios({
-      method: 'post',
-      url: 'http://localhost:3000/graphql',
+    axios.post(config.apiendpoint, {
+      query: print(ADD_POST),
       variables: {
         name: payload.name,
         category: payload.category,
         cover: payload.cover,
         description: payload.description,
         content: payload.content
-      },
-      data: {
-        query: print(ADD_POST)
       }
     })
     .then(() => {
@@ -39,28 +30,20 @@ export const actions = {
     })
   },
   getPosts ({commit}, quantity) {
-    axios({
-      url: 'http://localhost:3000/graphql',
-      method: 'post',
-      data: {
-        query: `
-            mutation {
-              getPosts(quantity: ${quantity}) 
-              {
-                content
-                description
-                name
-                view
-                category
-                cover
-                creator
-                created
-              }
-            }`
-      }
+    axios.post(config.apiendpoint, {
+      query: print(GET_POSTS),
+      variables: { quantity: quantity }
     })
     .then(({ data }) => {
       commit('savePosts', data.data.getPosts)
+    })
+  },
+  getSuccessPosts ({commit}, {category, quantity}) {
+    axios.post(config.apiendpoint, {
+      query: print(GET_SUCCESS_POSTS),
+      variables: { category: category, quantity: quantity }
+    }).then(({ data }) => {
+      commit('setSuccessPosts', data.data.getSuccessPosts)
     })
   },
   deletePost ({commit}, {name, key}) {
