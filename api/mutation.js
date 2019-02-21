@@ -17,6 +17,10 @@ export const ADD_POST = gql`
   }
 `
 
+// export const GET_POST = gql`
+//   mutation()
+// `
+
 export const GET_POSTS = gql`
   mutation($quantity: Int!) {
     getPosts(quantity: $quantity) {

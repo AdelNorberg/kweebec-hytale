@@ -3,7 +3,7 @@
     <div class="preview-popular">
       <h1 class="preview-header">Популярное</h1>
       <div class="preview-container">
-        <nuxt-link to="/error">
+        <nuxt-link :to="slugLink(successPosts[0])">
           <div class="preview-image theme-box">
             <div class="text-box text-box-big">{{ successPosts[0].name }}</div>
             <div class="view-box">
@@ -16,7 +16,7 @@
           </div>
         </nuxt-link>
         <div class="preview-mini">
-          <nuxt-link to="/error">
+          <nuxt-link :to="slugLink(successPosts[0])">
             <div class="preview-image-mini">
               <h3 class="text-box text-box-mini">{{ successPosts[1].name }}</h3>
               <div class="view-box view-box-mini">
@@ -28,7 +28,7 @@
               <div class="theme"></div>
             </div>
           </nuxt-link>
-          <nuxt-link to="/error">
+          <nuxt-link :to="slugLink(successPosts[0])">
             <div class="preview-image-mini">
               <h3 class="text-box text-box-mini">{{ successPosts[2].name }}</h3>
               <div class="view-box view-box-mini">
@@ -91,6 +91,7 @@
 </template>
 
 <script>
+import slug from 'slug'
 import { Hooper, Slide, Navigation as HooperNavigation } from 'hooper'
 import axios from 'axios'
 import { print } from 'graphql'
@@ -109,16 +110,17 @@ export default {
       title: 'Hytale - Новости, моды, карты, сборки'
     }
   },
-  async asyncData({store}) {
+  async asyncData() {
     const { data } = await axios.post(config.apiendpoint, {
       query: print(GET_SUCCESS_POSTS),
       variables: { category: 'Новости', quantity: 3 }
     })
-
+  
     return { successPosts: data.data.getSuccessPosts }
   },
   data() {
     return {
+      linkhelper: '',
       carousels: [ 
         [
           { name: 'Nsada' },
@@ -135,6 +137,11 @@ export default {
           { name: 'Nsada' }
         ]
       ]
+    }
+  },
+  methods: {
+    slugLink(link) {
+      return slug(link.name, { replacement: '-' })
     }
   }
 }

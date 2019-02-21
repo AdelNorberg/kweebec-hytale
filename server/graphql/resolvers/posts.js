@@ -31,6 +31,10 @@ module.exports = {
 
     return post;
   },
+  getPost: async (args, req) => {
+
+    return 1;
+  },
   getPosts: async (args, req) => {
     if(args.quantity > 15) {
       throw new Error("Превышено кол-во запрашиваемоего.");

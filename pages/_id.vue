@@ -35,12 +35,26 @@
 </template>
 
 <script>
-import MarkdownIt from 'markdown-it';
+import MarkdownIt from 'markdown-it'
+import slug from 'slug'
+import axios from 'axios'
+import config from '~/config'
+import { print } from 'graphql'
+import { GET_POST } from '~/api/mutation'
+
 let markdownIt = new MarkdownIt();
 
 export default {
-  asyncData () {
+  async asyncData ({params}) {
+    const namePost = slug(`${params.id}`, { replacement: ' ' })
+    console.log(namePost)
 
+    const { data } = await axios.post(config.apiendpoint, {
+      query: print(GET_POST),
+      variables: { category: 'Новости', quantity: 3 }
+    })
+    
+    return { post: data.data.getPost, lists: data.data.getPost}
   },
   data() {
     return {
