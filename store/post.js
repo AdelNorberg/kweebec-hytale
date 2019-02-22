@@ -4,13 +4,16 @@ import { print } from 'graphql'
 import config from '~/config'
 
 export const state = () => ({
-  posts: null
+  posts: null,
+  successPosts: null
 })
 
 export const mutations = {
   savePosts: (state, posts) => state.posts = posts, 
+  setSuccessPosts: (state, posts) => state.successPosts = posts,
   deletePost: (state, key) => state.posts.splice(key, 1),
-  approvePost: (state, key) => state.posts.splice(key, 1)
+  deleteSuccessPost: (state, key) => state.successPosts.splice(key, 1),
+  approvePost: (state, key) => state.posts.splice(key, 1),
 }
 
 export const actions = {
@@ -55,6 +58,17 @@ export const actions = {
       }
     }).then(() => {
       commit('deletePost', key)
+    })
+  },
+  deleteSuccessPost ({commit}, {name, key}) {
+    axios({
+      url: 'http://localhost:3000/graphql',
+      method: 'post',
+      data: {
+        query: `mutation {deleteSuccessPost(name: "${name}")}`
+      }
+    }).then(() => {
+      commit('deleteSuccessPost', key)
     })
   },
   approvePost ({commit}, {name, key})  {

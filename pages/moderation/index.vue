@@ -12,13 +12,16 @@
       <span></span>
     </div> 
     <div v-else class="list-container">
+      <div v-if="!getPosts[0]" class="no-content">Нет постов</div>
       <div v-for="(item, key) in getPosts" class="list" :key="key">
         <div class="creator">{{ item.creator }}</div>
         <div class="name">{{ item.name }}</div>
         <div class="category">{{ item.category }}</div>
         <div class="date">{{ item.created.substr(0,10) }}</div>
         <div class="approve" @click="approvePost(item.name, key)">Одобрить</div>
-        <div class="view" @click="viewPost(item.name, key)">Посмотреть</div>
+        <nuxt-link class="tab" :to="item.path">
+          <div class="view">Посмотреть</div>
+        </nuxt-link>
         <div class="delete" @click="deletePost(item.name, key)">Удалить</div>
       </div>
     </div>
@@ -83,6 +86,17 @@ export default {
   &:hover {
     color: $primary-color-2
   }
+}
+
+.no-content {
+  width: 100%;
+  height: 25rem;
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+  font-weight: 500;
+  color: hsla(0, 0%, 100%, 0.16);
+  align-items: center;
 }
 
 .list-container {

@@ -37,6 +37,7 @@ type RootMutation {
   getSuccessPosts(category: String!, quantity: Int!): [Post!]!
   approvePost(name: String!): Boolean
   deletePost(name: String!): Boolean
+  deleteSuccessPost(name: String!): Boolean
   getPosts(quantity: Int!): [Post!]!
   addPost(name: String!, category: String!, cover: String!, description: String!, content: String!): Post!
   signup(email: String!, password: String!, nickname: String!): AuthData!

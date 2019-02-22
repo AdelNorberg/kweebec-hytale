@@ -60,6 +60,7 @@ export const GET_POSTS = gql`
       cover
       creator
       created
+      path
     }
   }
 `

@@ -11,14 +11,19 @@
       <span></span>
       <span></span>
     </div> 
-    <div v-else class="list-container">
-      <div v-for="(item, key) in getPosts" class="list" :key="key">
-        <div class="creator">{{ item.creator }}</div>
-        <div class="name">{{ item.name }}</div>
-        <div class="category">{{ item.category }}</div>
-        <div class="date">{{ item.created.substr(0,10) }}</div>
-        <div class="view">Посмотреть</div>
-        <div class="delete" @click="deletePost(item.name, key)">Удалить</div>
+    <div v-else>
+      <div class="list-container">
+        <div v-if="!getPosts[0]" class="no-content">Нет постов</div>
+        <div v-for="(item, key) in getPosts" class="list" :key="key">
+          <div class="creator">{{ item.creator }}</div>
+          <div class="name">{{ item.name }}</div>
+          <div class="category">{{ item.category }}</div>
+          <div class="date">{{ item.created.substr(0,10) }}</div>
+          <nuxt-link class="tab" :to="`/${item.path}`">
+            <div class="view">Посмотреть</div>
+          </nuxt-link>
+          <div class="delete" @click="deleteSuccessPost(item.name, key)">Удалить</div>
+        </div>
       </div>
     </div>
   </div>
@@ -32,16 +37,16 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('post/getPosts', 15)
+    this.$store.dispatch('post/getSuccessPosts', {category: 'none', quantity: 15})
   },
   computed: {
     getPosts() {
-      return this.$store.state.post.posts
+      return this.$store.state.post.successPosts
     }
   },
   methods: {
-    deletePost(name, key) {
-      this.$store.dispatch('post/deletePost', { name, key })
+    deleteSuccessPost(name, key) {
+      this.$store.dispatch('post/deleteSuccessPost', { name, key })
     }
   }
 }
@@ -81,6 +86,17 @@ export default {
   &:hover {
     color: $primary-color-2
   }
+}
+
+.no-content {
+  width: 100%;
+  height: 25rem;
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+  font-weight: 500;
+  color: hsla(0, 0%, 100%, 0.16);
+  align-items: center;
 }
 
 .list-container {

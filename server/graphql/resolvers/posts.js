@@ -70,6 +70,14 @@ module.exports = {
     await Post.deleteOne({name: args.name});
     return true
   },
+  deleteSuccessPost: async (args, req) => {
+    if(req.session.userRole !== "admin") {
+      throw new Error("Нет прав.");
+    }
+    
+    await SuccessPost.deleteOne({name: args.name});
+    return true
+  },
   approvePost: async (args, req) => {
     if(req.session.userRole !== "admin") {
       throw new Error("Нет прав.");
