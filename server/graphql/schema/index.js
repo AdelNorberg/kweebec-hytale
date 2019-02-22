@@ -10,15 +10,22 @@ type AuthData {
 }
 
 type Post {
+  id: ID
   creator: String!
   name: String!
   description: String!
   content: String!
   category: String!
   cover: String!
+  path: String!
   view: Int!
   created: Date!
 } 
+
+type PostPage {
+  post: Post
+  lists: [Post]
+}
 
 type RootQuery {
   isLogin: AuthData
@@ -26,6 +33,7 @@ type RootQuery {
 }
 
 type RootMutation {
+  getSuccessPost(path: String!): PostPage
   getSuccessPosts(category: String!, quantity: Int!): [Post!]!
   approvePost(name: String!): Boolean
   deletePost(name: String!): Boolean

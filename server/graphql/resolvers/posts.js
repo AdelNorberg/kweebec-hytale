@@ -1,6 +1,8 @@
+const slug = require("slug");
 const Post = require("../../models/post");
 const User = require("../../models/user");
 const SuccessPost = require("../../models/successPost");
+
 
 module.exports = {
   addPost: async (args, req) => {
@@ -21,19 +23,25 @@ module.exports = {
       description: args.description,
       content: args.content,
       category: args.category,
-      cover: args.cover
+      cover: args.cover,
+      path: slug(args.name, { replacement: '-', lower: true })
     })
-
+    
     user.posts.push(post._id);
 
     await post.save();  
     await user.save();
 
-    return post;
+    return post
   },
-  getPost: async (args, req) => {
+  getSuccessPost: async (args, req) => {
+    const post = await SuccessPost.findOne({ path: args.path });
+    post.view++;
+    post.save();
 
-    return 1;
+    const lists = await SuccessPost.find({category: post.category}).limit(11)
+
+    return {post, lists}
   },
   getPosts: async (args, req) => {
     if(args.quantity > 15) {
@@ -41,15 +49,18 @@ module.exports = {
     }
 
     const posts = await Post.find({}).limit(args.quantity)
-    return posts;
+    return posts
   },
   getSuccessPosts: async (args, req) => {
     if(args.quantity > 15) {
       throw new Error("Превышено кол-во запрашиваемоего.");
     }
     
-    const posts = await SuccessPost.find({category: args.category}).limit(args.quantity)
-    return posts;
+    if(args.category === 'none') {
+      return posts = await SuccessPost.find({}).limit(args.quantity)
+    } else {
+      return posts = await SuccessPost.find({category: args.category}).limit(args.quantity)
+    }
   },
   deletePost: async (args, req) => {
     if(req.session.userRole !== "admin") {
@@ -57,7 +68,7 @@ module.exports = {
     }
     
     await Post.deleteOne({name: args.name});
-    return true;
+    return true
   },
   approvePost: async (args, req) => {
     if(req.session.userRole !== "admin") {
@@ -87,6 +98,7 @@ module.exports = {
       content: post.content,
       category: post.category,
       cover: post.cover,
+      path: post.path,
       created: post.created
     })
 

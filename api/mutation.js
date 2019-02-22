@@ -17,9 +17,37 @@ export const ADD_POST = gql`
   }
 `
 
-// export const GET_POST = gql`
-//   mutation()
-// `
+export const GET_SUCCESS_POST = gql`
+  mutation($path: String!) {
+    getSuccessPost(path: $path) {
+      post {
+        content
+        description
+        name
+        view
+        category
+        cover
+        creator
+        created
+      }
+      lists {
+        name 
+        cover 
+        created
+        path
+      }
+    }
+  }
+`
+
+export const GET_SUCCESS_POSTS_NAMES = gql`
+  mutation($category: String!, $quantity: Int!) {
+    getSuccessPosts(category: $category, quantity: $quantity) {
+      name
+      path
+    }
+  }
+`
 
 export const GET_POSTS = gql`
   mutation($quantity: Int!) {
@@ -39,6 +67,7 @@ export const GET_POSTS = gql`
 export const GET_SUCCESS_POSTS = gql`
   mutation($category: String!, $quantity: Int!) {
     getSuccessPosts(category: $category, quantity: $quantity) {
+      id
       content
       description
       name
@@ -47,6 +76,7 @@ export const GET_SUCCESS_POSTS = gql`
       cover
       creator
       created
+      path
     }
   }
 `

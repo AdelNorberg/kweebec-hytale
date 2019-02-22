@@ -7,9 +7,9 @@
           <div> Автор </div>
           <div class="creator">{{ post.creator }}</div>
         </div>
-        <div class="post-date">{{ post.date }}</div>
+        <div class="post-date">{{ post.created.substr(0,10)  }}</div>
       </div>
-      <img :src="post.img" :alt="post.name" class="post-img">
+      <img :src="post.cover" :alt="post.name" class="post-img">
       <div class="post-description">{{ post.description }}</div>
       <div class="render" v-html="renderArticle"></div>
     </div>
@@ -17,16 +17,18 @@
     <div class="lists-container">
       <div class="bg-lists-container">
         <div v-for="(list, key) in lists" :key="key" class="list-post-container">
-          <div class="list-post">
-            <div class="theme-box">
-              <img :src="list.img" :alt="list.name" class="list-img">
-              <div class="theme"></div>
+          <nuxt-link :to="list.path">
+            <div class="list-post">
+              <div class="theme-box">
+                <img :src="list.cover" :alt="list.name" class="list-img">
+                <div class="theme"></div>
+              </div>
+              <div class="list-content">
+                <div class="list-name">{{ list.name }}</div>
+                <div class="list-date">{{ list.created.substr(0,10) }}</div>
+              </div>
             </div>
-            <div class="list-content">
-              <div class="list-name">{{ list.name }}</div>
-              <div class="list-date">{{ list.date }}</div>
-            </div>
-        </div>
+          </nuxt-link>
           <hr class="silver" />
         </div>
       </div>
@@ -36,49 +38,23 @@
 
 <script>
 import MarkdownIt from 'markdown-it'
-import slug from 'slug'
 import axios from 'axios'
 import config from '~/config'
 import { print } from 'graphql'
-import { GET_POST } from '~/api/mutation'
+import { GET_SUCCESS_POST } from '~/api/mutation'
 
 let markdownIt = new MarkdownIt();
 
 export default {
   async asyncData ({params}) {
-    const namePost = slug(`${params.id}`, { replacement: ' ' })
-    console.log(namePost)
-
     const { data } = await axios.post(config.apiendpoint, {
-      query: print(GET_POST),
-      variables: { category: 'Новости', quantity: 3 }
+      query: print(GET_SUCCESS_POST),
+      variables: { path: `${params.id}` }
     })
     
-    return { post: data.data.getPost, lists: data.data.getPost}
-  },
-  data() {
-    return {
-      post: {
-        name: 'Технологии создания блоков',
-        creator: 'Adel Norberg',
-        date: '05.07.12',
-        img: '/hytale/screenshots/1.jpg',
-        description: 'Если вы смотрели трейлер анонса Hytale или заглянули в наш раздел СМИ, то вы точно обратили внимание на множество пейзажей и сборных домов - и каждый из них был построен из блоков. Сегодня мы расскажем о функциях и технологиях, которые делают блоки Hytale особенными, и о том, как вы сможете использовать их при создании своих собственных творений.',
-        content: "## RGB оттенки\n![adadad](/hytale/screenshots/5.jpg)\n*Отличный пример RGB-инструмента Hytale в действии!*\n\nТворческие инструменты Hytale можно использовать для изменения оттенка RGB любого блока. Изменяя красные, зеленые и синие свойства текстуры, вы можете динамически изменять ее цвет. Выше вы можете увидеть крайний пример этой техники: земля состоит из одного и того же основного блока травы, но в разных областях баланс RGB смещен в крайности.\n\n## Переходные текстуры\n![](/hytale/screenshots/1.jpg)\n*Текстуры перехода, используемые для разбиения линий между блоками.*\n\nТекстуры переходов используются для создания плавных переходов между различными типами блоков. В приведенном выше примере видно, что трава, песок и гравий сливаются без образования жестких линий в местах соприкосновения блоков.\n\n«Функция текстуры перехода - это один из многих приемов, которые мы используем, чтобы попытаться разрушить кубическую природу нашей игры», - говорит Николас Билоу Готье. «Это дополнительный четырехугольник с определенной текстурой, который может появляться на границе между различными блоками. Он определяется для каждого блока с набором допустимых блоков, на которые он может ориентироваться. Строители могут использовать эту функцию для создания хороших переходов между блоками »."
-      },
-      lists: [
-        {name: 'МОД КОТОРЫЙ СПАСЕТ МИР VARDAK', img: '/hytale/screenshots/1.jpg', date: '12.10.32'},
-        {name: 'КАРТА СОЗДАННАЯ ЮТУБЕРОМ', img: '/hytale/screenshots/2.jpg', date: '04.12.32'},
-        {name: 'ЭТИ ТЕКСТУРЫ ИМЕЮТ ВОЗМОЖНОСТЬ АНИМАЦИИ ГОЛОВЫ, РУК И ТУЛОВИЩА', img: '/hytale/screenshots/3.jpg', date: '12.12.32'},
-        {name: 'СБОРКА СОСТОЯЩАЯ ИЗ ТЕХНОЛОГИКИХ МОДОВ, КРАСОЧНЫХ ШЕЙДЕРОВ', img: '/hytale/screenshots/4.jpg', date: '12.12.32'},
-        {name: 'В ЭТОЙ КАРТЕ ЕСТЬ 3 ЗАМКА ПО КОТОРЫМ НУЖНО ПРОВОДИТЬ ИССЛЕОДВАНИЯ', img: '/hytale/screenshots/5.jpg', date: '12.12.32'},
-        {name: 'В НАШЕ ВРЕМЯ СЛОЖНО ЖИТЬ БЕЗ НОГИ, ПОЭТОМУ ЭТОТ МОД ДОБАВЛЯЕТ ', img: '/hytale/screenshots/6.jpg', date: '12.12.32'},
-        {name: 'ВИРТУОЗНОСТЬ СОБЫТИЙ В HYTALE ЗА БЕСПЛАТНО', img: '/hytale/screenshots/7.jpg', date: '12.12.32'},
-        {name: 'Я УСТАЛ ПИСАТЬ ЭТИ НАЗВАНИЯ, СПАСИТЕ', img: '/hytale/screenshots/8.jpg', date: '12.12.32'},
-        {name: 'ГЕОГРАФИЧЕСКИЙ КРИТИНИЗМ УЖЕ В ИГРЕ!', img: '/hytale/screenshots/9.jpg', date: '05.12.32'},
-        {name: 'В НАШЕ ВРЕМЯ СЛОЖНО ОБОЙТИСЬ БЕЗ ВЫРУБКИ ДЕРЕВЬЕВ', img: '/hytale/screenshots/10.jpg', date: '12.12.32'},
-        {name: 'КИРПИЧНЫЙ СКВАД ТЕПЕРЬ ВАС НЕ БУДЕТ БЕСПОКОИТЬ!', img: '/hytale/screenshots/11.jpg', date: '12.12.32'}
-      ]
+    return { 
+      post: data.data.getSuccessPost.post,
+      lists: data.data.getSuccessPost.lists
     }
   },
   computed: {
@@ -178,8 +154,8 @@ export default {
 
 .list-post {
   display: flex;
-  height: 6.5rem;
-  padding: 0 0.9rem 0 0.9rem;
+  height: 6rem;
+  padding: 0 1.2rem 0 1.2rem;
   cursor: pointer;
   padding: 0.5rem 0 0.5rem;
   &:hover {
@@ -188,6 +164,7 @@ export default {
 }
 
 .list-img {
+  height: 100%;
   width: 10rem;
   border: 1px solid #473e26;
   position: absolute;
@@ -213,8 +190,8 @@ export default {
 .list-name {
   color: #d29f32;
   font-weight: 700;
-  font-size: 0.79em;
-  padding-right: 0.2rem;
+  font-size: 1em;
+  padding-right: 0.4rem;
   line-height: 1.5em;
 }
 
