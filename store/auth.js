@@ -57,7 +57,9 @@ export const actions = {
         query: `{ isLogin {email, nickname, role}}`
       }
     }).then(({ data }) => {
-      commit('changeProfile', {isLogin: true, profileData: data.data.isLogin })
+      if(data.data.isLogin) {
+        commit('changeProfile', {isLogin: true, profileData: data.data.isLogin })
+      } 
     })
   },
   logout ({commit}) {

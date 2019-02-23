@@ -8,41 +8,32 @@ module.exports = {
     return true
   },
   isLogin: async (args, req, res) => {
-    try {
-      if(req.session.userID === undefined) {
-        throw new Error(errorName.UNAUTHORIZED)
-      }
-  
-      const profile = await User.findById(req.session.userID);
-      return profile
-
-    } catch (err) {
-      throw err.message;
+    if(req.session.userID === undefined) {
+      throw new Error("Не авторизован")
     }
+
+    const profile = await User.findById(req.session.userID);
+    return profile
   },
   signup: async (args, req) => {
-    try {
-      const existingUser = await User.findOne({ email: args.email });
-      if (existingUser) {
-        throw new Error("User exists already.");
-      }
-
-      const hashedPassword = await bcrypt.hash(args.password, 12);
-      const user = new User({
-        email: args.email,
-        password: hashedPassword,
-        nickname: args.nickname
-      });
- 
-      await user.save();
-
-      req.session.userID = user._doc._id;
-      req.session.userRole = user._doc.role;
-
-      return user;
-    } catch (err) {
-      throw err;
+    const existingUser = await User.findOne({ email: args.email });
+    if (existingUser) {
+      throw new Error("User exists already.");
     }
+
+    const hashedPassword = await bcrypt.hash(args.password, 12);
+    const user = new User({
+      email: args.email,
+      password: hashedPassword,
+      nickname: args.nickname
+    });
+
+    await user.save();
+
+    req.session.userID = user._doc._id;
+    req.session.userRole = user._doc.role;
+
+    return user;
   },
   login: async ({ email, password }, req) => {
     const user = await User.findOne({ email: email });

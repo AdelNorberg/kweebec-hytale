@@ -406,27 +406,27 @@ export default {
 }
 
 .hooper-slide:nth-child(1) {
-  background: url("/hytale/screenshots/9.jpg") no-repeat;
+  background: url("~static/hytale/screenshots/9.jpg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(2) {
-  background: url("/hytale/screenshots/8.jpg") no-repeat;
+  background: url("~static/hytale/screenshots/8.jpg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(3) {
-  background: url("/hytale/screenshots/11.jpg") no-repeat;
+  background: url("~static/hytale/screenshots/11.jpg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(4) {
-  background: url("/hytale/screenshots/10.jpg") no-repeat;
+  background: url("~static/hytale/screenshots/10.jpg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(5) {
-  background: url("/hytale/screenshots/12.jpg") no-repeat;
+  background: url("~static/hytale/screenshots/12.jpg") no-repeat;
   background-size: 100%;
 }
 
