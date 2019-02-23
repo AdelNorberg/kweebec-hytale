@@ -1,4 +1,5 @@
 import axios from 'axios'
+import config from '~/config'
 
 export const state = () => ({
   isLogin: false,
@@ -15,7 +16,7 @@ export const mutations = {
 export const actions = {
   signin ({commit}, payload) {
     axios({
-      url: 'http://localhost:3000/graphql',
+      url: config.apiendpoint,
       method: 'post',
       data: {
         query: `
@@ -33,7 +34,7 @@ export const actions = {
   },
   signup ({commit}, payload) {
     axios({
-      url: 'http://localhost:3000/graphql',
+      url: config.apiendpoint,
       method: 'post',
       data: {
         query: `
@@ -51,7 +52,7 @@ export const actions = {
   },
   isLogin ({commit}) {
     axios({
-      url: 'http://localhost:3000/graphql',
+      url: config.apiendpoint,
       method: 'post',
       data: {
         query: `{ isLogin {email, nickname, role}}`
@@ -64,7 +65,7 @@ export const actions = {
   },
   logout ({commit}) {
     axios({
-      url: 'http://localhost:3000/graphql',
+      url: config.apiendpoint,
       method: 'post',
       data: {
         query: `{ logout }`

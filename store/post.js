@@ -51,7 +51,7 @@ export const actions = {
   },
   deletePost ({commit}, {name, key}) {
     axios({
-      url: 'http://localhost:3000/graphql',
+      url: config.apiendpoint,
       method: 'post',
       data: {
         query: `mutation {deletePost(name: "${name}")}`
@@ -62,7 +62,7 @@ export const actions = {
   },
   deleteSuccessPost ({commit}, {name, key}) {
     axios({
-      url: 'http://localhost:3000/graphql',
+      url: config.apiendpoint,
       method: 'post',
       data: {
         query: `mutation {deleteSuccessPost(name: "${name}")}`
@@ -73,7 +73,7 @@ export const actions = {
   },
   approvePost ({commit}, {name, key})  {
     axios({
-      url: 'http://localhost:3000/graphql',
+      url: config.apiendpoint,
       method: 'post',
       data: {
         query: `mutation {approvePost(name: "${name}")}`
@@ -84,7 +84,7 @@ export const actions = {
   },
   viewPost ({commit}, {name, key})  {
     axios({
-      url: 'http://localhost:3000/graphql',
+      url: config.apiendpoint,
       method: 'post',
       data: {
         query: `mutation {viewPost(name: "${name}")}`
