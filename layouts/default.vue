@@ -45,9 +45,6 @@ import headerTop from "~/components/header-top"
 import footerBottom from "~/components/footer-bottom"
 
 export default {
-  created() {
-    this.$store.dispatch('auth/isLogin')
-  },
   components: {
     home,
     profile,

@@ -28,7 +28,6 @@ type PostPage {
 }
 
 type RootQuery {
-  isLogin: AuthData
   logout: Boolean
 }
 

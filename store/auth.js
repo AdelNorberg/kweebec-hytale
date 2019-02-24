@@ -42,15 +42,6 @@ export const actions = {
       commit('changeProfile', {isLogin: true, profileData: {...data.data.signup}})
     })
   },
-  isLogin ({commit}) {
-    axios.post(config.apiendpoint, {
-      query: `{ isLogin {email, nickname, role}}`
-    }).then(({ data }) => {
-      if(data.data.isLogin) {
-        commit('changeProfile', {isLogin: true, profileData: data.data.isLogin })
-      } 
-    })
-  },
   logout ({commit}) {
     axios.post(config.apiendpoint, {
       query: `{ logout }`

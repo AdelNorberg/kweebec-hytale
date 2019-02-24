@@ -6,14 +6,6 @@ module.exports = {
     req.session.destroy()
     return true
   },
-  isLogin: async (args, req, res) => {
-    if(req.session.userID === undefined) {
-      throw new Error("Не авторизован")
-    }
-
-    const profile = await User.findById(req.session.userID);
-    return profile
-  },
   signup: async (args, req) => {
     const existingUser = await User.findOne({ email: args.email });
     if (existingUser) {
@@ -31,6 +23,7 @@ module.exports = {
 
     req.session.userID = user._doc._id;
     req.session.userRole = user._doc.role;
+    req.session.userNickname = user._doc.nickname;
 
     return user;
   },
@@ -43,6 +36,7 @@ module.exports = {
       if (await bcrypt.compareSync(password, user.password)) {
         req.session.userID = user._doc._id;
         req.session.userRole = user._doc.role;
+        req.session.userNickname = user._doc.nickname;
 
         return { ...user._doc };
       }
