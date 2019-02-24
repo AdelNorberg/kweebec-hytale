@@ -47,7 +47,7 @@ let markdownIt = new MarkdownIt();
 
 export default {
   async asyncData ({params}) {
-    const { data } = await axios.post(config.apiendpointlocal, {
+    const { data } = await axios.post(config.apiendpoint, {
       query: print(GET_SUCCESS_POST),
       variables: { path: `${params.id}` }
     })
