@@ -28,9 +28,9 @@ import { GET_SUCCESS_POST } from '~/api/mutation'
 let markdownIt = new MarkdownIt();
 
 export default {
-  async asyncData ({params}) {
+  async asyncData ({params, error}) {
     try {
-      const { data } = await axios.post(config.apiendpoint, {
+      const { data } = await axios.post(process.env.baseUrl, {
         query: print(GET_SUCCESS_POST),
         variables: { path: `${params.id}` }
       })
@@ -39,8 +39,8 @@ export default {
         post: data.data.getSuccessPost.post,
         list: data.data.getSuccessPost.lists
       }
-    } catch (err) {
-      console.log(err)
+    } catch (e) {
+      error(e)
     }
   },
   components: {

@@ -130,12 +130,12 @@ export default {
   },
   async asyncData() {
     try {
-      const { data } = await axios.post(config.apiendpointlocal, {
+      const { data } = await axios.post(process.env.baseUrl, {
         query: print(GET_SUCCESS_POSTS),
         variables: { category: 'Новости', quantity: 3 }
       })
       
-      const res = await axios.post(config.apiendpointlocal, {
+      const res = await axios.post(process.env.baseUrl, {
         query: print(GET_SUCCESS_POSTS_NAMES),
         variables: { category: 'none', quantity: 7 }
       })  
@@ -144,8 +144,8 @@ export default {
         successPosts: data.data.getSuccessPosts, 
         dataLists: res.data.data.getSuccessPosts
       }
-    } catch (err) {
-      console.log(err)
+    } catch (e) {
+      error(e)
     }
   },
   data() {
