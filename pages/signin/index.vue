@@ -93,6 +93,8 @@ export default {
   -webkit-text-fill-color: transparent;
   margin: 0;
   font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 2rem;
   text-align: center;
   &:nth-child(2):hover {
     background: $primary-g;

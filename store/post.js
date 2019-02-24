@@ -50,45 +50,29 @@ export const actions = {
     })
   },
   deletePost ({commit}, {name, key}) {
-    axios({
-      url: config.apiendpoint,
-      method: 'post',
-      data: {
-        query: `mutation {deletePost(name: "${name}")}`
-      }
+    axios.post(config.apiendpoint, {
+      query: `mutation {deletePost(name: "${name}")}`
     }).then(() => {
       commit('deletePost', key)
     })
   },
   deleteSuccessPost ({commit}, {name, key}) {
-    axios({
-      url: config.apiendpoint,
-      method: 'post',
-      data: {
-        query: `mutation {deleteSuccessPost(name: "${name}")}`
-      }
+    axios.post(config.apiendpoint, {
+      query: `mutation {deleteSuccessPost(name: "${name}")}`
     }).then(() => {
       commit('deleteSuccessPost', key)
     })
   },
   approvePost ({commit}, {name, key})  {
-    axios({
-      url: config.apiendpoint,
-      method: 'post',
-      data: {
-        query: `mutation {approvePost(name: "${name}")}`
-      }
+    axios.post(config.apiendpoint, {
+      query: `mutation {approvePost(name: "${name}")}`
     }).then(() => {
       commit('approvePost', key)
     })
   },
   viewPost ({commit}, {name, key})  {
-    axios({
-      url: config.apiendpoint,
-      method: 'post',
-      data: {
-        query: `mutation {viewPost(name: "${name}")}`
-      }
+    axios.post(config.apiendpoint, {
+      query: `mutation {viewPost(name: "${name}")}`
     }).then(() => {
       commit('viewPost', key)
     })

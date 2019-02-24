@@ -1,17 +1,18 @@
 <template>
-  <div>
-    <div>asdad</div>
-    <button @click="onClick">clickme</button>
+  <div class="container">
+    <div class="list-container">
+      <nuxt-link to="/">
+        asd
+      </nuxt-link>
+    </div>
+    <div class="preview-container">asdsad</div>
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    onClick() {
-      this.$router.push('/mods/'+ 1)
-    }
-  }
+<style lang="scss" scoped>
+.container {
+  
 }
-</script>
+</style>
+
 

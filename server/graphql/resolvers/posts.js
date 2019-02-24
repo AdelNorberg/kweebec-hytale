@@ -48,6 +48,10 @@ module.exports = {
       throw new Error("Превышено кол-во запрашиваемоего.");
     }
 
+    if(req.session.userRole !== "admin") {
+      throw new Error("Нет прав.");
+    }
+
     const posts = await Post.find({}).limit(args.quantity)
     return posts
   },

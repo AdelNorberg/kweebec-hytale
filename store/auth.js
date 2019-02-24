@@ -15,48 +15,36 @@ export const mutations = {
 
 export const actions = {
   signin ({commit}, payload) {
-    axios({
-      url: config.apiendpoint,
-      method: 'post',
-      data: {
-        query: `
-          mutation {
-            login(email: "${payload.email}", password: "${payload.password}") {
-              nickname,
-              role,
-              email
-            }
-          }`
-      }
+    axios.post(config.apiendpoint, {
+      query: `
+        mutation {
+          login(email: "${payload.email}", password: "${payload.password}") {
+            nickname,
+            role,
+            email
+          }
+        }`
     }).then(({ data }) => {
       commit('changeProfile', {isLogin: true, profileData: {...data.data.login}})
     })
   },
   signup ({commit}, payload) {
-    axios({
-      url: config.apiendpoint,
-      method: 'post',
-      data: {
-        query: `
-          mutation {
-            signup(email: "${payload.email}", password: "${payload.password}", nickname: "${payload.nickname}") {
-              nickname,
-              role,
-              email
-            }
-          }`
-      }
+    axios.post(config.apiendpoint, {
+      query: `
+        mutation {
+          signup(email: "${payload.email}", password: "${payload.password}", nickname: "${payload.nickname}") {
+            nickname,
+            role,
+            email
+          }
+        }`
     }).then(({ data }) => {
       commit('changeProfile', {isLogin: true, profileData: {...data.data.signup}})
     })
   },
   isLogin ({commit}) {
-    axios({
-      url: config.apiendpoint,
-      method: 'post',
-      data: {
-        query: `{ isLogin {email, nickname, role}}`
-      }
+    axios.post(config.apiendpoint, {
+      query: `{ isLogin {email, nickname, role}}`
     }).then(({ data }) => {
       if(data.data.isLogin) {
         commit('changeProfile', {isLogin: true, profileData: data.data.isLogin })
@@ -64,12 +52,8 @@ export const actions = {
     })
   },
   logout ({commit}) {
-    axios({
-      url: config.apiendpoint,
-      method: 'post',
-      data: {
-        query: `{ logout }`
-      }
+    axios.post(config.apiendpoint, {
+      query: `{ logout }`
     }).then(() => {
       commit('changeProfile', {isLogin: false, profileData: {role: 'noname'}})
     })

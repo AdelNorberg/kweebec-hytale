@@ -137,6 +137,8 @@ export default {
   -webkit-text-fill-color: transparent;
   margin: 0;
   font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 1.7rem;
   text-align: center;
   transition: 0.5s;
   &:nth-child(1):hover {
