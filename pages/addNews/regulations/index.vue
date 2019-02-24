@@ -24,7 +24,7 @@
   font-size: 25px;
   box-shadow: $shadow-bg;
   border-radius: 5px;
-  min-height: 20rem;
+  min-height: 38rem;
   border: 2px solid $primary-bg-1;
   padding: 1.5rem;
   font-size: 1rem;

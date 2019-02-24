@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       routers: [
+        { name: 'Новости', router: 'news' },
         { name: 'Моды', router: 'mods' },
         { name: 'Карты', router: 'maps' },
         { name: 'Сборки', router: 'assembly' },
