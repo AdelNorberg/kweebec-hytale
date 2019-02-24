@@ -129,7 +129,7 @@ export default {
     }
   },
   async asyncData() {
-    const { data } = await axios.post(config.apiendpointlocal, {
+    const { data } = await axios.post(config.apiendpoint, {
       query: print(GET_SUCCESS_POSTS),
       variables: { category: 'Новости', quantity: 3 }
     })
