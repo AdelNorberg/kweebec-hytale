@@ -129,19 +129,23 @@ export default {
     }
   },
   async asyncData() {
-    const { data } = await axios.post(config.apiendpointlocal, {
-      query: print(GET_SUCCESS_POSTS),
-      variables: { category: 'Новости', quantity: 3 }
-    })
-    
-    const res = await axios.post(config.apiendpointlocal, {
-      query: print(GET_SUCCESS_POSTS_NAMES),
-      variables: { category: 'none', quantity: 7 }
-    })  
+    try {
+      const { data } = await axios.post(config.apiendpointlocal, {
+        query: print(GET_SUCCESS_POSTS),
+        variables: { category: 'Новости', quantity: 3 }
+      })
+      
+      const res = await axios.post(config.apiendpointlocal, {
+        query: print(GET_SUCCESS_POSTS_NAMES),
+        variables: { category: 'none', quantity: 7 }
+      })  
 
-    return { 
-      successPosts: data.data.getSuccessPosts, 
-      dataLists: res.data.data.getSuccessPosts
+      return { 
+        successPosts: data.data.getSuccessPosts, 
+        dataLists: res.data.data.getSuccessPosts
+      }
+    } catch (err) {
+      console.log(err)
     }
   },
   data() {
