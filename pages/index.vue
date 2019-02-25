@@ -130,12 +130,12 @@ export default {
   },
   async asyncData() {
     try {
-      const { data } = await axios.post(process.env.baseUrl, {
+      const { data } = await axios.post("http://0.0.0.0:3000/graphql", {
         query: print(GET_SUCCESS_POSTS),
         variables: { category: 'Новости', quantity: 3 }
       })
       
-      const res = await axios.post(process.env.baseUrl, {
+      const res = await axios.post("http://0.0.0.0:3000/graphql", {
         query: print(GET_SUCCESS_POSTS_NAMES),
         variables: { category: 'none', quantity: 7 }
       })

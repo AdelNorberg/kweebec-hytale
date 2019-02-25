@@ -30,7 +30,7 @@ let markdownIt = new MarkdownIt();
 export default {
   async asyncData ({params, error}) {
     try {
-      const { data } = await axios.post(process.env.baseUrl, {
+      const { data } = await axios.post("http://0.0.0.0:3000/graphql", {
         query: print(GET_SUCCESS_POST),
         variables: { path: `${params.id}` }
       })

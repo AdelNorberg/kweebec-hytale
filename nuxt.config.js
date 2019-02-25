@@ -3,10 +3,6 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
-
-  /*
-  ** Headers of the page
-  */
   head: {
     title: pkg.name,
     meta: [
@@ -18,43 +14,20 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
-  /*
-  ** Customize the progress-bar color
-  */
   loading: { color: '#ecbc62' },
-
-  /*
-  ** Global CSS
-  */
   css: [
     '~/assets/styles/transition.css'
   ],
-
-  /*
-  ** Plugins to load before mounting the App
-  */
- plugins: [
+  plugins: [
     { src: '~plugins/mavon-editor', ssr: false },
     { src: '~plugins/date-filter', mode: 'client' }
-  ],   
-  /*
-  ** Nuxt.js modules
-  */
+  ],
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
-  /*
-  ** Axios module configuration
-  */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-
-  /*
-  ** Build configuration
-  */
   build: {
     extend(config, ctx) {
       
