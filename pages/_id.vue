@@ -7,7 +7,7 @@
           <div> Автор </div>
           <div class="creator">{{ post.creator }}</div>
         </div>
-        <div class="post-date">{{ post.created.substr(0,10)  }}</div>
+        <div class="post-date">{{ post.created | date  }}</div>
       </div>
       <img :src="post.cover" :alt="post.name" class="post-img">
       <div class="post-description">{{ post.description }}</div>
@@ -29,14 +29,18 @@ let markdownIt = new MarkdownIt();
 
 export default {
   async asyncData ({params, error}) {
-    const { data } = await axios.post('http://localhost:3000/graphql', {
-      query: print(GET_SUCCESS_POST),
-      variables: { path: `${params.id}` }
-    })
-    
-    return { 
-      post: data.data.getSuccessPost.post,
-      list: data.data.getSuccessPost.lists
+    try {
+      const { data } = await axios.post(process.env.baseUrl, {
+        query: print(GET_SUCCESS_POST),
+        variables: { path: `${params.id}` }
+      })
+      
+      return { 
+        post: data.data.getSuccessPost.post,
+        list: data.data.getSuccessPost.lists
+      }
+    } catch (e) {
+      error({ statusCode: 404, message: 'Не найдено' })
     }
   },
   components: {

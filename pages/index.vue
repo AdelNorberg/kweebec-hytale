@@ -129,21 +129,23 @@ export default {
     }
   },
   async asyncData() {
-    const { data } = await axios.post('http://localhost:3000/graphql', {
-      query: print(GET_SUCCESS_POSTS),
-      variables: { category: 'Новости', quantity: 3 }
-    })
+    try {
+      const { data } = await axios.post(process.env.baseUrl, {
+        query: print(GET_SUCCESS_POSTS),
+        variables: { category: 'Новости', quantity: 3 }
+      })
+      
+      const res = await axios.post(process.env.baseUrl, {
+        query: print(GET_SUCCESS_POSTS_NAMES),
+        variables: { category: 'none', quantity: 7 }
+      })
 
-    console.log(process.env)
-    
-    const res = await axios.post('http://localhost:3000/graphql', {
-      query: print(GET_SUCCESS_POSTS_NAMES),
-      variables: { category: 'none', quantity: 7 }
-    })  
-
-    return { 
-      successPosts: data.data.getSuccessPosts, 
-      dataLists: res.data.data.getSuccessPosts
+      return { 
+        successPosts: data.data.getSuccessPosts, 
+        dataLists: res.data.data.getSuccessPosts
+      }
+    } catch (e) {
+      error({ statusCode: 404, message: 'Не найдено' })
     }
   },
   data() {
@@ -326,6 +328,9 @@ export default {
   font-weight: 500;
   font-size: 0.9rem;
   color: #a5b9c6;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 

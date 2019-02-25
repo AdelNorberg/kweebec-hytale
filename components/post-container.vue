@@ -27,8 +27,7 @@
 <script>
 export default {
   props: {
-    item: Object,
-    key: Number
+    item: Object
   }
 }
 </script>

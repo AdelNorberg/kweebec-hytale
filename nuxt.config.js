@@ -28,13 +28,15 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    '~/assets/styles/transition.css'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
  plugins: [
-    {src: '~plugins/mavon-editor', ssr: false }
+    { src: '~plugins/mavon-editor', ssr: false },
+    { src: '~plugins/date-filter', mode: 'client' }
   ],   
   /*
   ** Nuxt.js modules
@@ -57,5 +59,12 @@ module.exports = {
     extend(config, ctx) {
       
     }
+  },
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://157.230.108.113:3000/graphql'
+  },
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
   }
 }
