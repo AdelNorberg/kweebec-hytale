@@ -21,7 +21,7 @@
             </div>
           </nuxt-link>
           <div v-if="isLogin" class="auth-box">
-            <nuxt-link to="/addNews">
+            <nuxt-link v-if="getProfileData.role === 'admin' ? true : false" to="/addNews">
               <div class="add-news">Добавить новость</div>
             </nuxt-link>
             <profile class="profile-icon"/>

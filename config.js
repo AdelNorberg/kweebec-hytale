@@ -1,4 +1,4 @@
 export default {
-  apiendpoint: 'http://157.230.108.113/graphql',
-  apiendpointlocal: 'http://157.230.108.113/graphql'
+  apiendpoint: 'http://localhost:3000/graphql',
+  apiendpointlocal: 'http://localhost:3000/graphql'
 }

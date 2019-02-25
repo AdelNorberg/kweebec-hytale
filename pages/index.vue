@@ -74,21 +74,19 @@
     <div class="carousel-container">
       <div class="carousel-text-header">
         <nuxt-link to="/error">
-            <div class="header-text">Моды</div>
+            <div class="header-text">Арты</div>
         </nuxt-link>
         <nuxt-link to="/mods" class="all">Показать всё...</nuxt-link>
       </div>
       <hooper :items-to-show="3.8" :items-to-slide="1" :wheelControl="false" class="carousel">
-        <slide v-for="(slide, key) in carousels[0]" :key="key">
-          {{ slide.name }}
-        </slide>
+        <slide v-for="(slide, key) in carousels[0]" :key="key"></slide>
         <hooper-navigation slot="hooper-addons" />
       </hooper>
     </div>
 
     <hr class="gold" />
-
-    <div class="carousel-container">
+ 
+    <!-- <div class="carousel-container">
       <div class="carousel-text-header">
         <nuxt-link to="/error">
             <div class="header-text">Карты</div>
@@ -101,7 +99,7 @@
         </slide>
         <hooper-navigation slot="hooper-addons" />
       </hooper>
-    </div> 
+    </div>  -->
   </div>
 </template>
 
@@ -130,12 +128,12 @@ export default {
   },
   async asyncData() {
     try {
-      const { data } = await axios.post("http://0.0.0.0:3000/graphql", {
+      const { data } = await axios.post(config.apiendpoint, {
         query: print(GET_SUCCESS_POSTS),
         variables: { category: 'Новости', quantity: 3 }
       })
       
-      const res = await axios.post("http://0.0.0.0:3000/graphql", {
+      const res = await axios.post(config.apiendpoint, {
         query: print(GET_SUCCESS_POSTS_NAMES),
         variables: { category: 'none', quantity: 7 }
       })
@@ -145,7 +143,7 @@ export default {
         dataLists: res.data.data.getSuccessPosts
       }
     } catch (e) {
-      error({ statusCode: 404, message: 'Не найдено' })
+      console.log(e)
     }
   },
   data() {
@@ -396,7 +394,7 @@ export default {
 }
 
 .hooper-slide {
-  height: 200px;
+  height: 185px;
   background-color: #91B6C6;
   padding: 20px;
   margin-left: 2rem;
@@ -413,27 +411,27 @@ export default {
 }
 
 .hooper-slide:nth-child(1) {
-  background: url("~static/Hytale/screenshots/9.jpg") no-repeat;
+  background: url("~static/Hytale/1.jpeg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(2) {
-  background: url("~static/Hytale/screenshots/8.jpg") no-repeat;
+  background: url("~static/Hytale/2.jpg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(3) {
-  background: url("~static/Hytale/screenshots/11.jpg") no-repeat;
+  background: url("~static/Hytale/3.jpg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(4) {
-  background: url("~static/Hytale/screenshots/10.jpg") no-repeat;
+  background: url("~static/Hytale/4.jpeg") no-repeat;
   background-size: 100%;
 }
 
 .hooper-slide:nth-child(5) {
-  background: url("~static/Hytale/screenshots/12.jpg") no-repeat;
+  background: url("~static/Hytale/5.jpg") no-repeat;
   background-size: 100%;
 }
 

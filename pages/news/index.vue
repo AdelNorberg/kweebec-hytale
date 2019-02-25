@@ -18,13 +18,17 @@ import { GET_SUCCESS_POSTS } from '~/api/mutation'
 
 export default {
   async asyncData() {
-    const { data } = await axios.post(config.apiendpointlocal, {
-      query: print(GET_SUCCESS_POSTS),
-      variables: { category: 'Новости', quantity: 10 }
-    })
+    try {
+      const { data } = await axios.post(config.apiendpointlocal, {
+        query: print(GET_SUCCESS_POSTS),
+        variables: { category: 'Новости', quantity: 10 }
+      })
 
-    return { 
-      successPosts: data.data.getSuccessPosts
+      return { 
+        successPosts: data.data.getSuccessPosts
+      }
+    } catch (e) {
+      console.log(e)
     }
   },
   components: {

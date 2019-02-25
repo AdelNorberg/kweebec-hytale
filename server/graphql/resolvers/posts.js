@@ -10,6 +10,10 @@ module.exports = {
       throw new Error("Авторизуйтесь")
     }
     
+    if(req.session.userRole !== "admin") {
+      throw new Error("Нет прав.");
+    }
+
     const existingPost = await Post.findOne({ name: args.name });
     
     if (existingPost) {

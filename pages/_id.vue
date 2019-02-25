@@ -30,7 +30,7 @@ let markdownIt = new MarkdownIt();
 export default {
   async asyncData ({params, error}) {
     try {
-      const { data } = await axios.post("http://0.0.0.0:3000/graphql", {
+      const { data } = await axios.post(config.apiendpoint, {
         query: print(GET_SUCCESS_POST),
         variables: { path: `${params.id}` }
       })
@@ -40,7 +40,7 @@ export default {
         list: data.data.getSuccessPost.lists
       }
     } catch (e) {
-      error({ statusCode: 404, message: 'Не найдено' })
+      console.log(e)
     }
   },
   components: {
