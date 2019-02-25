@@ -129,23 +129,21 @@ export default {
     }
   },
   async asyncData() {
-    try {
-      const { data } = await axios.post(process.env.baseUrl, {
-        query: print(GET_SUCCESS_POSTS),
-        variables: { category: 'Новости', quantity: 3 }
-      })
-      
-      const res = await axios.post(process.env.baseUrl, {
-        query: print(GET_SUCCESS_POSTS_NAMES),
-        variables: { category: 'none', quantity: 7 }
-      })  
+    const { data } = await axios.post('http://localhost:3000/graphql', {
+      query: print(GET_SUCCESS_POSTS),
+      variables: { category: 'Новости', quantity: 3 }
+    })
 
-      return { 
-        successPosts: data.data.getSuccessPosts, 
-        dataLists: res.data.data.getSuccessPosts
-      }
-    } catch (e) {
-      error(e)
+    console.log(process.env)
+    
+    const res = await axios.post('http://localhost:3000/graphql', {
+      query: print(GET_SUCCESS_POSTS_NAMES),
+      variables: { category: 'none', quantity: 7 }
+    })  
+
+    return { 
+      successPosts: data.data.getSuccessPosts, 
+      dataLists: res.data.data.getSuccessPosts
     }
   },
   data() {
