@@ -2,7 +2,7 @@
   <div class="container">
     <div class="cartoon"></div>
     <div class="info">
-      <div class="name">Упс... 404</div>
+      <div class="name">Упс... {{ error.statusCode }}</div>
       <hr class="gold" />
       <div class="text">Этот раздел отсутствует или он пока недоступен. &nbsp;
         <nuxt-link to="/">
@@ -12,6 +12,13 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['error']
+}
+</script>
+
 
 <style lang="scss" scoped>
 @import '~assets/var.scss';

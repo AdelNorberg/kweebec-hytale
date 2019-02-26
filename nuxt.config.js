@@ -29,11 +29,6 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
-  build: {
-    extend(config, ctx) {
-      
-    }
-  },
   env: {
     baseUrl: process.env.BASE_URL || 'http://157.230.108.113:3000/graphql'
   },
