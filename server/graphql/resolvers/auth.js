@@ -12,6 +12,10 @@ module.exports = {
       throw new Error("User exists already.");
     }
 
+    if(args.password.length > 7 || args.password.length > 30) {
+      throw new Error("Длина не соответствует требованиям");
+    }
+
     const hashedPassword = await bcrypt.hash(args.password, 12);
     const user = new User({
       email: args.email,

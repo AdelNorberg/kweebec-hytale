@@ -3,14 +3,16 @@ import config from '~/config'
 
 export const state = () => ({
   isLogin: false,
-  profileData: {role: 'noname'}
+  profileData: {role: 'noname'},
+  error: null
 })
 
 export const mutations = {
   changeProfile (state, payload) {
     state.isLogin = payload.isLogin
     state.profileData = payload.profileData
-  }
+  },
+  setError: (state, payload) => state.error = payload
 }
 
 export const actions = {
@@ -26,6 +28,12 @@ export const actions = {
         }`
     }).then(({ data }) => {
       commit('changeProfile', {isLogin: true, profileData: {...data.data.login}})
+      this.$router.push('/')
+    }).catch((error) => {
+      commit('setError', 'Неверные данные')
+      setTimeout(() => {
+        commit('setError', null)
+      }, 7000)
     })
   },
   signup ({commit}, payload) {
@@ -39,7 +47,13 @@ export const actions = {
           }
         }`
     }).then(({ data }) => {
+      this.$router.push('/')
       commit('changeProfile', {isLogin: true, profileData: {...data.data.signup}})
+    }).catch((error) => {
+      commit('setError', 'Неверные данные')
+      setTimeout(() => {
+        commit('setError', null)
+      }, 7000)
     })
   },
   logout ({commit}) {

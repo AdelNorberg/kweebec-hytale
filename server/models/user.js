@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   email: {
     type: String,
-    required: true
+    required: true,
+    minlength: 4, 
+    maxlength: 30
   },
   password: {
     type: String,
@@ -12,7 +14,9 @@ const userSchema = new Schema({
   },
   nickname: {
     type: String,
-    required: true
+    required: true,
+    minlength: 4, 
+    maxlength: 14
   },
   posts: {
     type: [Schema.Types.ObjectId],

@@ -11,45 +11,125 @@
           <label class="label">Никнейм</label>
           <div class="fu"></div>
           <input class="input-in-container input" type="text" name="text" placeholder="Введите ник..." v-model.trim="name">
+          <div v-if="errorName" class="error">{{ errorName }}</div>
         </div>
         
         <div class="input-container">
           <label class="label">Почта</label>
           <div class="fu"></div>
           <input class="input-in-container input" type="text" name="email" placeholder="Введите почту..." v-model.trim="email">
+          <div v-if="errorEmail" class="error">{{ errorEmail }}</div>
         </div>
       </div>
 
       <label class="label">Пароль</label>
       <input class="input" type="password" placeholder="Введите пароль..." v-model.trim="password">
+      <div v-if="errorPassword" class="error">{{ errorPassword }}</div>
       
       <label class="label">Повторите пароль</label>
       <input class="input" type="password" placeholder="Введите пароль..." v-model.trim="repeat">
+      <div v-if="errorRepeat" class="error">{{ errorRepeat }}</div>
       
       <div class="box-button">
         <button class="button">Отправить</button>
       </div>
+      <div v-if="getError" class="errorBottom">{{ getError }}</div>
     </form>
   </div>
 </template>
 
 <script>
-export default {
+import { required, minLength, maxLength, email, sameAs } from 'vuelidate/lib/validators'
+
+export default { 
   data() {
     return {
       name: '',
       email: '',
       password: '',
-      repeat: ''
+      repeat: '',
+      errorName: '',
+      errorEmail: '',
+      errorPassword: '',
+      errorRepeat: ''
+    }
+  },
+  validations: {
+    name: {
+      required,
+      minLength: minLength(4),
+      maxLength: maxLength(14)
+    },
+    email: {
+      required,
+      email,
+      maxLength: maxLength(30)
+    },
+    password: {
+      required,
+      minLength: minLength(8),
+      maxLength: maxLength(30)
+    },
+    repeat: {
+      sameAsPassword: sameAs('password')
     }
   },
   methods: {
     submit() {
+      if(!this.$v.name.required) {
+        this.errorName = 'Введите имя'
+        return
+      } else if(!this.$v.name.minLength) {
+        this.errorName = 'Нужно минимум 4 символа'
+        return
+      } else if(!this.$v.name.maxLength) {
+        this.errorName = 'Более 14 символов недопустимо'
+        return
+      } else {
+        this.errorName = ''
+      }
+
+      if(!this.$v.email.required) {
+        this.errorEmail = 'Введите почту'
+        return
+      } else if(!this.$v.email.maxLength) {
+        this.errorEmail = 'Более 30 символов недопустимо'
+        return
+      } else if(!this.$v.email.email) {
+        this.errorEmail = 'Адрес почты введен некорректно'
+        return
+      } else {
+        this.errorEmail = ''
+      }
+
+      if(!this.$v.password.required) {
+        this.errorPassword = 'Пароль неккоректен'
+        return
+      } else if(!this.$v.password.minLength) {
+        this.errorPassword = 'Минимальное количество символов в пароле 8'
+        return
+      } else if(!this.$v.password.maxLength) {
+        this.errorPassword = 'Максимальное количество символов в пароле 30'
+        return
+      } else {
+        this.errorPassword = ''
+      }
+
+      if(!this.$v.repeat.sameAsPassword) {
+        this.errorRepeat = 'Неверно введен повтор пароля'
+        return
+      } else {
+        this.errorRepeat = ''
+      }
+
       this.$store.dispatch('auth/signup', {
         email: this.email, password: this.password, nickname: this.name
-      }).then(() => {
-        this.$router.push('/')
       })
+    }
+  },
+  computed: {
+    getError() {
+      return this.$store.state.auth.error
     }
   }
 }
@@ -186,5 +266,19 @@ export default {
 
 .fu {
   height: 0.5rem;
+}
+
+.error {
+  color: #e43d59;
+  font-weight: 300;
+  margin-top: -0.7rem;
+  padding-left: 0.5rem;
+}
+
+.errorBottom {
+  color: #e43d59;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 0.7rem;
 }
 </style>

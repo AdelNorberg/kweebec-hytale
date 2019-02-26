@@ -37,7 +37,8 @@
     "simple-vue-validator": "^0.16.0",
     "slug": "^1.0.0",
     "socket.io": "^2.2.0",
-    "terser": "^3.14.1"
+    "terser": "^3.14.1",
+    "vuelidate": "^0.7.4"
   },
   "devDependencies": {
     "node-sass": "^4.11.0",

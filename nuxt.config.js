@@ -20,7 +20,8 @@ module.exports = {
   ],
   plugins: [
     { src: '~plugins/mavon-editor', ssr: false },
-    { src: '~plugins/date-filter', mode: 'client' }
+    { src: '~/plugins/date-filter', mode: 'client' },
+    { src: '~/plugins/vuelidate', mode: 'client' }
   ],
   modules: [
     '@nuxtjs/axios'

@@ -14,34 +14,80 @@
         type="text" 
         name="email" 
         placeholder="Введите почту...">
-
+      <div v-if="error" class="error">{{ error }}</div>
       <label class="label">Пароль</label>
       <input 
         v-model.trim="password"
         type="password" 
         placeholder="Введите пароль..."
         class="input">
+      <div v-if="errorSec" class="error">{{ errorSec }}</div>
       <div class="box-button">
         <button class="button">Отправить</button>
       </div>
+      <div v-if="getError" class="errorBottom">{{ getError }}</div>
     </form>
   </div>
 </template>
 
 <script>
+import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
+
 export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: '',
+      errorSec: ''
+    }
+  },
+  validations: {
+    email: {
+      required,
+      email,
+      maxLength: maxLength(30)
+    },
+    password: {
+      required,
+      minLength: minLength(8),
+      maxLength: maxLength(30)
     }
   },
   methods: {
     submit() {
+      if(!this.$v.email.required) {
+        this.error = 'Введите почту'
+        return
+      } else if(!this.$v.email.maxLength) {
+        this.error = 'Более 30 символов недопустимо'
+        return
+      } else if(!this.$v.email.email) {
+        this.error = 'Адрес почты введен некорректно'
+        return
+      } else {
+        this.error = ''
+      }
+
+      if(!this.$v.password.required) {
+        this.errorSec = 'Пароль неккоректен'
+        return
+      } else if(!this.$v.password.minLength) {
+        this.errorSec = 'Минимальное количество символов в пароле 8'
+        return
+      } else if(!this.$v.password.maxLength) {
+        this.errorSec = 'Максимальное количество символов в пароле 30'
+        return
+      } else {
+        this.errorSec = ''
+      }
+
       this.$store.dispatch('auth/signin', {email: this.email, password: this.password})
-      .then(() => {
-        this.$router.push('/')
-      })
+    }
+  },
+  computed: {
+    getError() {
+      return this.$store.state.auth.error
     }
   }
 }
@@ -150,5 +196,19 @@ export default {
   &:hover {
     background: linear-gradient(to bottom, #4c8db6, hsl(207, 59%, 36%));
   }
+}
+
+.error {
+  color: #e43d59;
+  font-weight: 300;
+  margin-top: -0.7rem;
+  padding-left: 0.5rem;
+}
+
+.errorBottom {
+  color: #e43d59;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 0.7rem;
 }
 </style>
