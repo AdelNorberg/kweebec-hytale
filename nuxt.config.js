@@ -29,7 +29,7 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
   env: {
-    baseUrl: process.env._AXIOS_BASE_URL_ || 'http://localhost:3000/'
+    baseUrl: process.env.BASE_URL || 'http://157.230.108.113'
   },
   transition: {
     name: 'fade',

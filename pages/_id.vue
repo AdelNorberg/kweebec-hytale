@@ -28,9 +28,9 @@ import { GET_SUCCESS_POST } from '~/api/mutation'
 let markdownIt = new MarkdownIt();
 
 export default {
-  async asyncData ({params}) {
+  async asyncData ({params, env}) {
     try {
-      const { data } = await axios.post(process.env._AXIOS_BASE_URL_ + 'graphql', {
+      const { data } = await axios.post(env.baseUrl + '/graphql', {
         query: print(GET_SUCCESS_POST),
         variables: { path: `${params.id}` }
       })
