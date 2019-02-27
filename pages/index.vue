@@ -126,9 +126,9 @@ export default {
       title: 'Hytale - Новости, моды, карты, сборки'
     }
   },
-  async asyncData() {
+  async asyncData({env}) { 
     try {
-      const { data } = await axios.post(config.apiendpointlocal, {
+      const { data } = await axios.post(process.env._AXIOS_BASE_URL_ + 'graphql', {
         query: print(GET_SUCCESS_POSTS),
         variables: { category: 'Новости', quantity: 3 }
       })
