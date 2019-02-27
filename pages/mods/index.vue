@@ -11,15 +11,16 @@
 
 <script>
 import postContainer from '~/components/post-container'
-import config from '~/config'
 import axios from 'axios'
 import { print } from 'graphql'
 import { GET_SUCCESS_POSTS } from '~/api/mutation'
 
 export default {
   async asyncData() {
+    const url = process.client ? env.clientUrl : env.serverUrl
+
     try {
-      const { data } = await axios.post(config.apiendpointlocal, {
+      const { data } = await axios.post(url, {
         query: print(GET_SUCCESS_POSTS),
         variables: { category: 'Моды', quantity: 10 }
       })

@@ -21,7 +21,6 @@
 import MarkdownIt from 'markdown-it'
 import axios from 'axios'
 import postsList from '~/components/posts-list'
-import config from '~/config'
 import { print } from 'graphql'
 import { GET_SUCCESS_POST } from '~/api/mutation'
 
@@ -29,8 +28,10 @@ let markdownIt = new MarkdownIt();
 
 export default {
   async asyncData ({params, env}) {
+    const url = process.client ? env.clientUrl : env.serverUrl
+
     try {
-      const { data } = await axios.post(process.client ? env.clientUrl : env.serverUrl, {
+      const { data } = await axios.post(url, {
         query: print(GET_SUCCESS_POST),
         variables: { path: `${params.id}` }
       })

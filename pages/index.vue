@@ -110,7 +110,6 @@ import { print } from 'graphql'
 import './../node_modules/hooper/dist/hooper.css'
 import vk from '~/assets/vk'
 import youtube from '~/assets/youtube'
-import config from '~/config'
 import { GET_SUCCESS_POSTS, GET_SUCCESS_POSTS_NAMES } from '~/api/mutation'
 
 export default {
@@ -126,14 +125,16 @@ export default {
       title: 'Hytale - Новости, моды, карты, сборки'
     }
   },
-  async asyncData({env}) { 
+  async asyncData({env}) {
+    const url = process.client ? env.clientUrl : env.serverUrl 
+
     try {
-      const { data } = await axios.post(process.client ? env.clientUrl : env.serverUrl, {
+      const { data } = await axios.post(url, {
         query: print(GET_SUCCESS_POSTS),
         variables: { category: 'Новости', quantity: 3 }
       })
       
-      const res = await axios.post(config.apiendpoint, {
+      const res = await axios.post(url, {
         query: print(GET_SUCCESS_POSTS_NAMES),
         variables: { category: 'none', quantity: 7 }
       })

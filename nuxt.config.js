@@ -18,7 +18,7 @@ module.exports = {
     '~/assets/styles/transition.css'
   ],
   plugins: [
-    { src: '~plugins/mavon-editor', ssr: false },
+    { src: '~plugins/mavon-editor', mode: 'client' },
     { src: '~/plugins/date-filter', mode: 'client' },
     { src: '~/plugins/vuelidate', mode: 'client' }
   ],

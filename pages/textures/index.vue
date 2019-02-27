@@ -18,8 +18,10 @@ import { GET_SUCCESS_POSTS } from '~/api/mutation'
 
 export default {
   async asyncData() {
+    const url = process.client ? env.clientUrl : env.serverUrl
+
     try {
-      const { data } = await axios.post(config.apiendpointlocal, {
+      const { data } = await axios.post(url, {
         query: print(GET_SUCCESS_POSTS),
         variables: { category: 'Текстуры', quantity: 10 }
       })
