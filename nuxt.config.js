@@ -29,7 +29,8 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+    serverUrl: 'http://localhost:3000/graphql',
+    clientUrl: 'http://157.230.108.113/graphql'
   },
   transition: {
     name: 'fade',

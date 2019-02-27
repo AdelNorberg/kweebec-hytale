@@ -128,7 +128,7 @@ export default {
   },
   async asyncData({env}) { 
     try {
-      const { data } = await axios.post(env.baseUrl + '/graphql', {
+      const { data } = await axios.post(process.client ? env.clientUrl : env.serverUrl, {
         query: print(GET_SUCCESS_POSTS),
         variables: { category: 'Новости', quantity: 3 }
       })
