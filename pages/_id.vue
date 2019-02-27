@@ -30,7 +30,7 @@ let markdownIt = new MarkdownIt();
 export default {
   async asyncData ({params, error}) {
     try {
-      const { data } = await axios.post(config.apiendpoint, {
+      const { data } = await axios.post(config.apiendpointlocal, {
         query: print(GET_SUCCESS_POST),
         variables: { path: `${params.id}` }
       })
