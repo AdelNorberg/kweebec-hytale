@@ -11,7 +11,7 @@
       <div class="left">
         <div class="category">{{ item.category }}</div>
         <div class="circle">&#9679;</div>
-        <div class="date">{{ item.created.substr(0,10) }}</div>
+        <div class="date">{{ item.created | date  }}</div>
         <div class="circle">&#9679;</div>
         <div class="view"> 
           <svg class="view-icon" width="23" height="16" viewBox="0 0 23 16" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -10,7 +10,7 @@
             </div>
             <div class="list-content">
               <div class="list-name">{{ item.name }}</div>
-              <div class="list-date">{{ item.created.substr(0,10) }}</div>
+              <div class="list-date">{{ item.created | date  }}</div>
             </div>
           </div>
         </nuxt-link>

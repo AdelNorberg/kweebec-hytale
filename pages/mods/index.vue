@@ -16,7 +16,7 @@ import { print } from 'graphql'
 import { GET_SUCCESS_POSTS } from '~/api/mutation'
 
 export default {
-  async asyncData() {
+  async asyncData({env}) {
     const url = process.client ? env.clientUrl : env.serverUrl
 
     try {
