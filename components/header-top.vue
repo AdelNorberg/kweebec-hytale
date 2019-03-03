@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="header-kweebec"></div>
+    <img src="/images/kweebec.png" class="header-kweebec" alt="kweebec">
     <div class="header-text">Kweebec</div>
   </header>
 </template>
@@ -19,10 +19,8 @@
 }
 
 .header-kweebec {
-  height: 8rem;
+  border: none;
   width: 10rem;
-  background: url("/images/kweebec.png") no-repeat;
-  background-size: 100%;
 }
 
 .header-text {

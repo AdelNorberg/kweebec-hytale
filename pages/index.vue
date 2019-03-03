@@ -120,11 +120,6 @@ export default {
     vk,
     youtube
   },
-  head() {
-    return {
-      title: 'Hytale - Новости, моды, карты, сборки'
-    }
-  },
   async asyncData({env}) {
     const url = process.client ? env.clientUrl : env.serverUrl 
 
@@ -208,6 +203,14 @@ export default {
   border: solid 1px #473e26;
   img {
     border: none;
+  }
+  h3 {
+    color: rgba(231, 231, 231, 0.959);
+    -webkit-background-clip: none;
+    background-clip: none;
+    -webkit-text-fill-color: white;
+    text-transform: none;
+    background: none;
   }
   &:hover {
     border-color: $primary-color-2;

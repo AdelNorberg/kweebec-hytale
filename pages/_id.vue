@@ -44,6 +44,18 @@ export default {
       console.log(e)
     }
   },
+  head() {
+    return {
+      title: this.post.name,
+      meta: [
+        { hid: 'og:type', property: 'og:type', content: 'article' },
+        { hid: 'og:title', property: 'og:title', content: this.post.name },
+        { hid: 'og:image', property: 'og:image', content: this.post.cover },
+        { hid: 'og:description', property: 'og:description', content: this.post.description },
+        { hid: 'description', name: 'description', content: this.post.description }
+      ]
+    }
+  },
   components: {
     postsList
   },
