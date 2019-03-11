@@ -17,8 +17,32 @@
         <div class="creator">{{ item.creator }}</div>
         <div class="name">{{ item.name }}</div>
         <div class="category">{{ item.category }}</div>
-        <div class="date">{{ item.created.substr(0,10) }}</div>
+        <div class="date">{{ item.created | date}}</div>
         <div class="approve" @click="approvePost(item.name, key)">Одобрить</div>
+        <div class="view" @click="metaModal(item.name)">Метаданные</div>
+        <transition name="fade">
+          <div v-if="modal.active" class="modal">
+            <div class="modal-container">
+              <div class="modal-close-container">
+                <div @click="closeModal" class="modal-close">
+                  <exit />
+                </div>
+              </div>
+              <div class="modal-name">
+                {{ modal.name }}
+              </div>
+              <hr>
+              <div class="keywords">Введите ключи через запятую без пробелов</div>
+              <textarea
+                v-model.trim="modal.keywords"
+                class="input" 
+                type="text"
+                placeholder="Введите ключи...">
+              </textarea>
+              <div @click="approvePost(item.name, item.key, modal.keywords)" class="save-add">Сохранить и добавить</div>
+            </div>
+          </div>
+        </transition>
         <nuxt-link class="tab" :to="item.path">
           <div class="view">Посмотреть</div>
         </nuxt-link>
@@ -29,9 +53,23 @@
 </template>
 
 <script>
+import exit from '~/assets/icons/exit'
+
 export default {
+  components: {
+    exit
+  },
   mounted() {
     this.$store.dispatch('post/getPosts', 15)
+  },
+  data() {
+    return {
+      modal: {
+        active: false,
+        name: null,
+        keywords: null
+      }
+    }
   },
   computed: {
     getPosts() {
@@ -42,11 +80,21 @@ export default {
     deletePost(name, key) {
       this.$store.dispatch('post/deletePost', { name, key })
     },
-    approvePost(name, key) {
-      this.$store.dispatch('post/approvePost', { name, key })
+    approvePost(name, key, keywords) {
+      this.$store.dispatch('post/approvePost', { name, key, keywords: keywords || '' })
+      this.modal.active = false
     },
     viewPost(name, key) {
       this.$store.dispatch('post/viewPost', { name, key })
+    },
+    metaModal(name) {
+      this.modal = {
+        active: true,
+        name: name
+      }
+    },
+    closeModal() {
+      this.modal = {active: false, keywords: null}
     }
   }
 }
@@ -55,6 +103,13 @@ export default {
 
 <style lang="scss" scoped>
 @import '~assets/var.scss';
+
+hr {
+  height: 1px;
+  border: 0;
+  background: $primary-color-1;
+  margin: 1rem 1rem 0 1rem;
+}
 
 .moderation {
   display: flex;
@@ -196,6 +251,77 @@ export default {
     height: 24px;
     opacity: 0.1;
     -moz-transform: translateY(-21px);
+  }
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #1f1d1d9b;
+  z-index: 10;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-container {
+  height: 20rem;
+  width: 30rem;
+  background-color: $primary-bg-2;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.modal-close-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.modal-close {
+  cursor: pointer;
+}
+
+.modal-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+}
+
+.keywords {
+  margin-top: 1.2rem;
+  margin-left: 1rem;
+}
+
+.input {
+  padding: .8em 1em;
+  margin: 0.7rem 1rem 1rem 1rem;
+  border: none;
+  background: #0c1523;
+  box-sizing: border-box;
+  font-size: .9em;
+  max-width: 93%;
+  border: 1px solid #302f2c;
+  color: $secondary-color-1;
+  transition: border 0.2s, background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+
+.save-add {
+  font-weight: 600;
+  z-index: 0;
+  text-align: center;
+  width: 13rem;
+  height: 2rem;
+  margin: 0 1rem 0 1rem;
+  cursor: pointer;
+  padding: 0.1rem 0.5rem 0 0.5rem;
+  background: linear-gradient(to bottom, #3583b4, #225b8b);
+  &:hover {
+    background: linear-gradient(to bottom, #4c8db6, hsl(207, 59%, 36%));
   }
 }
 </style>

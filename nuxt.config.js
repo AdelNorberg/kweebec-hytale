@@ -29,7 +29,7 @@ module.exports = {
   },
   env: {
     serverUrl: 'http://localhost:3000/graphql',
-    clientUrl: 'http://157.230.108.113/graphql'
+    clientUrl: 'http://localhost:3000/graphql'
   },
   transition: {
     name: 'fade',

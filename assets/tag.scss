@@ -2,12 +2,21 @@ h1 {
 
 }
 
-h2, h3 {
+h2 {
   background: linear-gradient(#ffe98d, #e19f27);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
+  color: #ecbc62;
+  margin-top: 2rem;
+}
+
+h3 {
+  background: linear-gradient(#ffe98d, #e19f27);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: #ecbc62;
   margin-top: 2rem;
 }

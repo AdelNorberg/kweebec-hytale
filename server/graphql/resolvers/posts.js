@@ -2,6 +2,7 @@ const slug = require("slug");
 const Post = require("../../models/post");
 const User = require("../../models/user");
 const SuccessPost = require("../../models/successPost");
+const randomKey = require("../../helpers/randomKey")
 
 
 module.exports = {
@@ -115,7 +116,8 @@ module.exports = {
       category: post.category,
       cover: post.cover,
       path: post.path,
-      created: post.created
+      created: post.created,
+      keywords: args.keywords || randomKey(post.description)
     })
 
     await successPost.save();

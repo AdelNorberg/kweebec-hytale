@@ -18,7 +18,7 @@
           <div class="creator">{{ item.creator }}</div>
           <div class="name">{{ item.name }}</div>
           <div class="category">{{ item.category }}</div>
-          <div class="date">{{ item.created.substr(0,10) }}</div>
+          <div class="date">{{ item.created | date }}</div>
           <nuxt-link class="tab" :to="`/${item.path}`">
             <div class="view">Посмотреть</div>
           </nuxt-link>
@@ -116,7 +116,7 @@ export default {
 }
 
 .name {
-  width: 50%;
+  width: 45%;
 }
 
 .category {
@@ -124,7 +124,7 @@ export default {
 }
 
 .date {
-  width: 10%;
+  width: 15%;
 }
 
 .view, .delete{

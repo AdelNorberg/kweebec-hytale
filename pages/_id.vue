@@ -52,7 +52,8 @@ export default {
         { hid: 'og:title', property: 'og:title', content: this.post.name },
         { hid: 'og:image', property: 'og:image', content: this.post.cover },
         { hid: 'og:description', property: 'og:description', content: this.post.description },
-        { hid: 'description', name: 'description', content: this.post.description }
+        { hid: 'description', name: 'description', content: this.post.description },
+        { hid: 'keywords', name: 'keywords', content: this.post.keywords || 'hytale' }
       ]
     }
   },

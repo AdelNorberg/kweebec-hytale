@@ -63,9 +63,9 @@ export const actions = {
       commit('deleteSuccessPost', key)
     })
   },
-  approvePost ({commit}, {name, key})  {
+  approvePost ({commit}, {name, key, keywords})  {
     axios.post(config.apiendpoint, {
-      query: `mutation {approvePost(name: "${name}")}`
+      query: `mutation {approvePost(name: "${name}", keywords: "${keywords}")}`
     }).then(() => {
       commit('approvePost', key)
     })

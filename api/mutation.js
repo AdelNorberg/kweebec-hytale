@@ -29,6 +29,7 @@ export const GET_SUCCESS_POST = gql`
         cover
         creator
         created
+        keywords
       }
       lists {
         name 

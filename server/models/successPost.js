@@ -30,6 +30,10 @@ const SuccessPostSchema = new Schema({
     type: String,
     required: true
   },
+  keywords: {
+    type: String,
+    required: true
+  },
   view: {type: Number, default: 1 },
   created: { type: Date, default: Date.now }
 });

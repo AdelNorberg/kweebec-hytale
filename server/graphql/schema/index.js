@@ -20,6 +20,7 @@ type Post {
   path: String!
   view: Int!
   created: Date!
+  keywords: String
 } 
 
 type PostPage {
@@ -34,7 +35,7 @@ type RootQuery {
 type RootMutation {
   getSuccessPost(path: String!): PostPage
   getSuccessPosts(category: String!, quantity: Int!): [Post!]!
-  approvePost(name: String!): Boolean
+  approvePost(name: String!, keywords: String): Boolean
   deletePost(name: String!): Boolean
   deleteSuccessPost(name: String!): Boolean
   getPosts(quantity: Int!): [Post!]!

@@ -22,6 +22,7 @@
               class="input" 
               type="text"
               placeholder="Введите название...">
+            <div v-if="errors.errorName" class="error">{{ errors.errorName }}</div>
           </div>
           <div class="select-form">
             <h3 class="header-text">Категория</h3>
@@ -45,6 +46,7 @@
             class="input link" 
             type="text"
             placeholder="Введите ссылку...">
+          <div v-if="errors.errorCover" class="error">{{ errors.errorCover }}</div>
           <h3 class="header-text">Описание</h3>
           <textarea
             v-model.trim="formData.description"
@@ -52,9 +54,11 @@
             type="text"
             placeholder="Введите описание...">
           </textarea>
+          <div v-if="errors.errorDesc" class="error">{{ errors.errorDesc }}</div>
         </div>
         <h3 class="header-text">Основное описание</h3>
         <mavon-editor v-model="formData.content" language="ru"/>
+        <div v-if="errors.errorContent" class="error margin">{{ errors.errorContent }}</div>
       </div>
       <button class="button" @click="onClickForm">Отправить</button>
     </div>
@@ -62,26 +66,108 @@
 </template>
 
 <script>
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+
 export default {
   data() {
     return { 
       formData: {
         name: '',
-        category: '',
+        category: 'Новости',
         description: '',
         cover: '',
         content: ''
+      },
+      errors: {
+        errorName: '',
+        errorDesc: '',
+        errorCover: '',
+        errorContent: ''
+      }
+    }
+  },
+  validations: {
+    formData: {
+      name: {
+        required,
+        minLength: minLength(4),
+        maxLength: maxLength(34)
+      },
+      description: {
+        required,
+        minLength: minLength(40),
+        maxLength: maxLength(240)
+      },
+      cover: {
+        required,
+        minLength: minLength(7),
+        maxLength: maxLength(500)
+      },
+      content: {
+        required,
+        minLength: minLength(240),
+        maxLength: maxLength(50000)
       }
     }
   },
   methods: {
     onClickForm() {
-      const { name, category, description, cover, content } = this.formData
-      if(name && category && description && cover && content) {
-        this.$store.dispatch('post/addPost', {
-        ...this.formData
-      })
+      const { name, description, cover, content } = this.$v.formData
+
+      if(!name.required) {
+        this.errors.errorName = 'Введите название'
+        return
+      } else if(!name.minLength) {
+        this.errors.errorName = 'Нужно минимум 4 символа'
+        return
+      } else if(!name.maxLength) {
+        this.errors.errorName = 'Более 34 символов недопустимо'
+        return
+      } else {
+        this.errors.errorName = ''
       }
+
+      if(!description.required) {
+        this.errors.errorDesc = 'Введите описание'
+        return
+      } else if(!description.minLength) {
+        this.errors.errorDesc = 'Нужно минимум 40 символа'
+        return
+      } else if(!description.maxLength) {
+        this.errors.errorDesc = 'Более 240 символов недопустимо'
+        return
+      } else {
+        this.errors.errorDesc = ''
+      }
+
+      if(!cover.required) {
+        this.errors.errorDesc = 'Введите описание'
+        return
+      } else if(!cover.minLength) {
+        this.errors.errorDesc = 'Нужно минимум 7 символа'
+        return
+      } else if(!cover.maxLength) {
+        this.errors.errorDesc = 'Более 500 символов недопустимо'
+        return
+      } else {
+        this.errors.errorDesc = ''
+      }
+
+      if(!content.required) {
+        this.errors.errorContent = 'Введите описание'
+        return
+      } else if(!content.minLength) {
+        this.errors.errorContent = 'Нужно минимум 240 символа'
+        return
+      } else if(!content.maxLength) {
+        this.errors.errorContent = 'Более 50 000 символов недопустимо'
+        return
+      } else {
+        this.errors.errorContent = ''
+      }
+
+
+      this.$store.dispatch('post/addPost', { ...this.formData })
     }
   }
 }
@@ -195,6 +281,17 @@ export default {
 
 .select-form {
   margin-left: 1.5rem;
+}
+
+.error {
+  color: #e43d59;
+  font-weight: 300;
+  margin-top: -0.7rem;
+  padding-left: 0.5rem;
+}
+
+.margin {
+  margin-top: 1rem;
 }
 </style>
 
