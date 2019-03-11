@@ -4,7 +4,7 @@
     <div class="info">
       <div class="name">Упс... {{ error.statusCode }}</div>
       <hr class="gold" />
-      <div class="text">Этот раздел отсутствует или он пока недоступен. &nbsp;
+      <div class="text">Этот раздел отсутствует или он недоступен. &nbsp;
         <nuxt-link to="/">
             <div class="link-home"> Вернуться на главную </div>
         </nuxt-link>

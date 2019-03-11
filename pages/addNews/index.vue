@@ -57,7 +57,7 @@
           <div v-if="errors.errorDesc" class="error">{{ errors.errorDesc }}</div>
         </div>
         <h3 class="header-text">Основное описание</h3>
-        <mavon-editor v-model="formData.content" language="ru"/>
+        <mavon-editor v-model="formData.content" language="ru" :toolbars="toolbars"/>
         <div v-if="errors.errorContent" class="error margin">{{ errors.errorContent }}</div>
       </div>
       <button class="button" @click="onClickForm">Отправить</button>
@@ -69,6 +69,9 @@
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
+  validate ({ store }) {
+    return store.state.auth.isLogin
+  },
   data() {
     return { 
       formData: {
@@ -83,7 +86,24 @@ export default {
         errorDesc: '',
         errorCover: '',
         errorContent: ''
-      }
+      },
+      toolbars: {
+        bold: true,
+        italic: true,
+        header: true, 
+        strikethrough: true,
+        link: true,
+        imagelink: true,
+        fullscreen: true,
+        readmodel: true,
+        htmlcode: true,
+        help: true,
+        undo: true,
+        redo: true,
+        trash: true, 
+        subfield: true,
+        preview: true
+    }
     }
   },
   validations: {

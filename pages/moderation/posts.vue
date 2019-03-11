@@ -31,6 +31,9 @@
 
 <script>
 export default {
+  validate ({ store }) {
+    return store.state.auth.profileData.role === 'admin'
+  },
   data() {
     return {
       tabs: ['Модерация', 'Посты']

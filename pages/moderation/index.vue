@@ -56,6 +56,9 @@
 import exit from '~/assets/icons/exit'
 
 export default {
+  validate ({ store }) {
+    return store.state.auth.profileData.role === 'admin'
+  },
   components: {
     exit
   },
