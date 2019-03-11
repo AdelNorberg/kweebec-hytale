@@ -1,6 +1,12 @@
 <template>
   <div class="default-layout">
     <div class="container">
+      <transition name="fade">
+        <div v-if="$nuxt.isOffline" class="offline">
+          Нет подключения к Интернету
+          <loading class="loading-icon"/> 
+        </div>
+      </transition>
       <header-top />
       <nav-menu />
       <nuxt />
@@ -15,6 +21,7 @@ import profile from "~/assets/profile"
 import headerTop from "~/components/header-top"
 import footerBottom from "~/components/footer-bottom"
 import navMenu from "~/components/nav-menu"
+import loading from "~/assets/icons/loading"
 
 export default {
   components: {
@@ -22,7 +29,8 @@ export default {
     profile,
     headerTop,
     footerBottom,
-    navMenu
+    navMenu,
+    loading
   },
   data() {
     return {
@@ -95,5 +103,21 @@ a {
 .container {
   width: 1440px;
   padding: 0 20px 0 20px;
+}
+
+.offline {
+  position: absolute;
+  height: 3rem;
+  right: 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25rem;
+}
+
+.loading-icon {
+  margin-top: 0.3rem;
+  margin-left: 0.3rem;
 }
 </style>
