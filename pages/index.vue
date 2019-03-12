@@ -69,54 +69,36 @@
           </div>
         </div>
       </div>
-    </div>
-    
-    <div class="carousel-container">
-      <div class="carousel-text-header">
-        <nuxt-link to="/error">
-            <div class="header-text">Арты</div>
-        </nuxt-link>
-        <nuxt-link to="/mods" class="all">Показать всё...</nuxt-link>
-      </div>
-      <hooper :items-to-show="3.8" :items-to-slide="1" :wheelControl="false" class="carousel">
-        <slide v-for="(slide, key) in carousels[0]" :key="key"></slide>
-        <hooper-navigation slot="hooper-addons" />
-      </hooper>
-    </div>
+    </div> 
 
     <hr class="gold" />
- 
-    <!-- <div class="carousel-container">
-      <div class="carousel-text-header">
-        <nuxt-link to="/error">
-            <div class="header-text">Карты</div>
-        </nuxt-link>
-        <nuxt-link to="/maps" class="all">Показать всё...</nuxt-link>
-      </div>
-      <hooper :items-to-show="3.8" :items-to-slide="1" :wheelControl="false" class="carousel">
-        <slide v-for="(slide, key) in carousels[1]" :key="key">
-          {{ slide.name }}
-        </slide>
-        <hooper-navigation slot="hooper-addons" />
-      </hooper>
-    </div>  -->
+
+    <div class="carousel-text-header">
+      <nuxt-link to="/error">
+          <div class="header-text">Арты</div>
+      </nuxt-link>
+      <nuxt-link to="/maps" class="all">Показать всё...</nuxt-link>
+    </div>
+
+    <no-ssr>
+      <swiper :options="swiperOption" class="carousel">
+        <swiper-slide v-for="(item, key) in carousels[0]" :key="key" class="swiper-slide">
+          <img :src="item.img" alt="">
+        </swiper-slide>
+      </swiper>
+    </no-ssr>
   </div>
 </template>
 
 <script>
-import { Hooper, Slide, Navigation as HooperNavigation } from 'hooper'
 import axios from 'axios'
 import { print } from 'graphql'
-import './../node_modules/hooper/dist/hooper.css'
 import vk from '~/assets/vk'
 import youtube from '~/assets/youtube'
 import { GET_SUCCESS_POSTS, GET_SUCCESS_POSTS_NAMES } from '~/api/mutation'
 
 export default {
   components: {
-    Hooper,
-    Slide,
-    HooperNavigation,
     vk,
     youtube
   },
@@ -146,20 +128,25 @@ export default {
     return {
       carousels: [ 
         [
-          { name: 'Nsada' },
-          { name: 'Nsada' },
-          { name: 'Nsada' },
-          { name: 'Nsada' },
-          { name: 'Nsada' }
-        ],
-        [
-          { name: 'Nsada' },
-          { name: 'Nsada' },
-          { name: 'Nsada' },
-          { name: 'Nsada' },
-          { name: 'Nsada' }
+          { img: '/Hytale/1.jpeg' },
+          { img: '/Hytale/2.jpg' },
+          { img: '/Hytale/3.jpg' },
+          { img: '/Hytale/4.jpeg' },
+          { img: '/Hytale/5.jpg' }
         ]
-      ]
+      ],
+      swiperOption: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction'
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      }
     }
   }
 }
@@ -178,7 +165,6 @@ export default {
 
 .carousel-text-header {
   display: flex;
-  font-display: row;
   justify-content: space-between;
   align-items: center;
 }
@@ -380,7 +366,7 @@ export default {
   border: 0;
   background: #715e2b;
   margin-top: 4rem;
-  margin-bottom: -2.5rem;
+  margin-bottom: 4rem;
   margin-left: 2rem;
   margin-right: 2rem;
 }
@@ -397,16 +383,17 @@ export default {
   font-weight: 600;
 }
 
-.hooper-slide {
-  height: 185px;
-  background-color: #91B6C6;
-  padding: 20px;
-  margin-left: 2rem;
+.carousel {
+  display: flex;
+}
+
+.swiper-slide {
+  position: relative;
+  height: 226px;
+  margin-left: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
-  font-size: 30px;
   border: 1px solid #534329;
   cursor: pointer;
   &:hover {
@@ -414,36 +401,17 @@ export default {
   }
 }
 
-.hooper-slide:nth-child(1) {
-  background: url("~static/Hytale/1.jpeg") no-repeat;
-  background-size: 100%;
-}
-
-.hooper-slide:nth-child(2) {
-  background: url("~static/Hytale/2.jpg") no-repeat;
-  background-size: 100%;
-}
-
-.hooper-slide:nth-child(3) {
-  background: url("~static/Hytale/3.jpg") no-repeat;
-  background-size: 100%;
-}
-
-.hooper-slide:nth-child(4) {
-  background: url("~static/Hytale/4.jpeg") no-repeat;
-  background-size: 100%;
-}
-
-.hooper-slide:nth-child(5) {
-  background: url("~static/Hytale/5.jpg") no-repeat;
-  background-size: 100%;
-}
-
-.hooper-slide:first-child {
-  margin-left: 0;
-}
-
 .is-active {
   background-color: #518aa3;
+}
+
+@media screen and (max-width: 1440px) {
+  .all {
+    display: none;
+  }
+
+  .carousel-text-header {
+    justify-content: center;
+  }
 }
 </style>

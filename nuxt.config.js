@@ -19,7 +19,8 @@ module.exports = {
   plugins: [
     { src: '~plugins/mavon-editor', mode: 'client' },
     { src: '~/plugins/date-filter', mode: 'client' },
-    { src: '~/plugins/vuelidate', mode: 'client' }
+    { src: '~/plugins/vuelidate', mode: 'client' },
+    { src: '~/plugins/vue-awesome-swiper', mode: 'client' }
   ],
   modules: [
     '@nuxtjs/axios'

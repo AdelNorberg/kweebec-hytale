@@ -35,6 +35,7 @@
       </div>
       <div v-if="getError" class="errorBottom">{{ getError }}</div>
     </form>
+    <loading-bg :active="getLoading"/>
   </div>
 </template>
 
@@ -42,6 +43,9 @@
 import { required, minLength, maxLength, email, sameAs } from 'vuelidate/lib/validators'
 
 export default { 
+  components: {
+    loadingBg: () => import('~/components/loading-bg')
+  },
   data() {
     return {
       name: '',
@@ -130,6 +134,9 @@ export default {
   computed: {
     getError() {
       return this.$store.state.auth.error
+    },
+    getLoading() {
+      return this.$store.state.auth.loading
     }
   }
 }
@@ -149,6 +156,7 @@ export default {
   background: $primary-bg-2;
   box-shadow: $shadow-bg;
   border-radius: 5px;
+  position: relative;
 }
 
 .gold {

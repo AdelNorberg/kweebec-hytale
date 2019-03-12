@@ -25,11 +25,11 @@ $pulse-duration: 750ms;
 }
 
 .loading {
-    border-radius: 50%;
-    width: $base-line-height;
-    height: $base-line-height;
-    border: .25rem solid $off-white;
-    border-top-color: $white;
-    animation: spin $spin-duration infinite linear;
+  border-radius: 50%;
+  width: $base-line-height;
+  height: $base-line-height;
+  border: .25rem solid $off-white;
+  border-top-color: $white;
+  animation: spin $spin-duration infinite linear;
 }
 </style>

@@ -95,12 +95,12 @@ a {
 .default-layout {
   display: flex;
   justify-content: center;
-  min-width: 1440px;
   background: url("/Hytale/new-bg.webp") no-repeat;
   background-size: 115%;
 }
 
 .container {
+  min-width: 1440px;
   width: 1440px;
   padding: 0 20px 0 20px;
 }
@@ -119,5 +119,12 @@ a {
 .loading-icon {
   margin-top: 0.3rem;
   margin-left: 0.3rem;
+}
+
+
+@media screen and (max-width: 1440px) {
+  .container {
+    min-width: 100%;
+  }
 }
 </style>

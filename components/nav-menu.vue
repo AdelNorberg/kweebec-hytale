@@ -79,6 +79,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   height: 3.5rem;
+  width: 100%;
   background-color: $primary-bg-2;
   font-size: 25px;
   box-shadow: $shadow-bg;

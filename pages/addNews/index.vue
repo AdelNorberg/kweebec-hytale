@@ -1,6 +1,7 @@
 <template>
   <div class="add-container">
     <div class="content">
+      <loading-bg :active="getLoading"/>
       <div class="form-container">
         <h3 class="header-text">Заметка</h3>
         <div class="note-container">
@@ -69,6 +70,9 @@
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
+  components: {
+    loadingBg: () => import('~/components/loading-bg')
+  },
   validate ({ store }) {
     return store.state.auth.isLogin
   },
@@ -186,8 +190,12 @@ export default {
         this.errors.errorContent = ''
       }
 
-
       this.$store.dispatch('post/addPost', { ...this.formData })
+    }
+  },
+  computed: {
+    getLoading() {
+      return this.$store.state.post.loading
     }
   }
 }
@@ -235,6 +243,7 @@ export default {
 
 .content {
   width: 100%;
+  position: relative;
 }
 
 .form-container {

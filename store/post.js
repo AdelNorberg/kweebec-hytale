@@ -5,7 +5,8 @@ import config from '~/config'
 
 export const state = () => ({
   posts: null,
-  successPosts: null
+  successPosts: null,
+  loading: false
 })
 
 export const mutations = {
@@ -14,10 +15,13 @@ export const mutations = {
   deletePost: (state, key) => state.posts.splice(key, 1),
   deleteSuccessPost: (state, key) => state.successPosts.splice(key, 1),
   approvePost: (state, key) => state.posts.splice(key, 1),
+  setLoading: (state, payload) => state.loading = payload
 }
 
 export const actions = {
   addPost ({commit}, payload) {
+    commit('setLoading', true)
+
     axios.post(config.apiendpoint, {
       query: print(ADD_POST),
       variables: {
@@ -29,7 +33,10 @@ export const actions = {
       }
     })
     .then(() => {
+      commit('setLoading', false)
       this.$router.push('/')
+    }).catch((error) => {
+      commit('setLoading', false)
     })
   },
   getPosts ({commit}, quantity) {
