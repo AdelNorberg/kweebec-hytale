@@ -76,6 +76,12 @@ export default {
   margin-top: 2rem;
   font-size: 1.5rem;
 }
+
+@media screen and (max-width: 1400px) {
+  .list-container {
+    justify-content: center
+  }
+}
 </style>
 
 

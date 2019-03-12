@@ -39,7 +39,7 @@ p {
 
 .item {
   margin-top: 1.5rem;
-  width: 50%;
+  width: 678px;
   min-width: 50%;
   padding: 0 0.6rem 0 0.6rem;
   &:hover {

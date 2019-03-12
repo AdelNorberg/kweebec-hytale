@@ -42,16 +42,8 @@ export default {
     home,
     profile
   },
-  data() {
-    return {
-      routers: [
-        { name: 'Новости', router: 'news' },
-        { name: 'Моды', router: 'mods' },
-        { name: 'Карты', router: 'maps' },
-        { name: 'Сборки', router: 'assembly' },
-        { name: 'Текстуры', router: 'textures' }
-      ]
-    }
+  props: {
+    routers: Array
   },
   computed: {
     isLogin() {

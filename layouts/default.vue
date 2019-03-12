@@ -8,7 +8,7 @@
         </div>
       </transition>
       <header-top />
-      <nav-menu />
+      <nav-menu :routers="routers"/>
       <nuxt />
       <footer-bottom />
     </div>

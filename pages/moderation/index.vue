@@ -118,7 +118,6 @@ hr {
   display: flex;
   flex-direction: column;
   min-height: 40rem;
-  max-width: 100%;
   background: $primary-bg-2;
   box-shadow: $shadow-bg;
   border: 2px solid $primary-bg-1; 
