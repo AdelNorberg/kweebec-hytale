@@ -20,14 +20,12 @@ module.exports = {
     { src: '~plugins/mavon-editor', mode: 'client' },
     { src: '~/plugins/date-filter', mode: 'client' },
     { src: '~/plugins/vuelidate', mode: 'client' },
-    { src: '~/plugins/vue-awesome-swiper', mode: 'client' }
+    { src: '~/plugins/vue-awesome-swiper', mode: 'client' },
+    { src: '~/plugins/vue-responsive-components', mode: 'client' }
   ],
   modules: [
     '@nuxtjs/axios'
   ],
-  axios: {
-    // See https://github.com/nuxt-community/axios-module#options
-  },
   env: {
     serverUrl: 'http://localhost:3000/graphql',
     clientUrl: 'http://localhost:3000/graphql'

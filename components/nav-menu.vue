@@ -1,36 +1,45 @@
 <template>
-    <nav class="nav-bar">
-      <div class="nav-lists">
-        <nuxt-link to="/">
-          <home class="home-icon" />
-        </nuxt-link>
-        <nuxt-link v-for="(item, key) in routers" :to="'/' + item.router" :key="key" class="nav-bar-list">
-          {{ item.name }}
-        </nuxt-link>
-        <nuxt-link v-if="getProfileData.role === 'admin' ? true : false" to="/moderation" class="nav-bar-list">
-          Модерация
-        </nuxt-link>
-      </div>
-      <div class="nav-right-box">
-        <nuxt-link v-if="!isLogin"  to="signin">
-          <div class="sign-button">
-            Войти
-          </div>
-        </nuxt-link>
-        <div v-if="isLogin" class="auth-box">
-          <nuxt-link v-if="getProfileData.role === 'admin' ? true : false" to="/addNews">
-            <div class="add-news">Добавить новость</div>
+    <div>
+      <nav class="nav-bar">
+        <div class="nav-lists">
+          <nuxt-link to="/">
+            <home class="home-icon" :class="{'active-home': $route.path === '/'}"/>
           </nuxt-link>
-          <profile class="profile-icon"/>
-          <div class="profile">  
-            {{ getProfileData.nickname }}
-          </div>
-          <div @click="onLogout" class="logout">Выйти</div>
+          <nuxt-link v-for="(item, key) in routers" 
+                    :to="'/' + item.router" 
+                    :key="key" 
+                    :class="{active: $route.name === item.router}" 
+                    class="nav-bar-list">
+            {{ item.name }}
+          </nuxt-link>
+          <nuxt-link v-if="getProfileData.role === 'admin' ? true : false" 
+                    :class="{active: $route.name === 'moderation'}" 
+                    to="/moderation" 
+                    class="nav-bar-list">
+            Модерация
+          </nuxt-link>
         </div>
-      </div>
-      <div class="decor"></div>
-      <div class="decor-second"></div>
-    </nav>  
+        <div class="nav-right-box">
+          <nuxt-link v-if="!isLogin"  to="signin">
+            <div class="sign-button">
+              Войти
+            </div>
+          </nuxt-link>
+          <div v-if="isLogin" class="auth-box">
+            <nuxt-link v-if="getProfileData.role === 'admin' ? true : false" to="/addNews">
+              <div class="add-news" :class="{active: $route.path === '/addNews'}">Добавить новость</div>
+            </nuxt-link>
+            <profile class="profile-icon"/>
+            <div class="profile">  
+              {{ getProfileData.nickname }}
+            </div>
+            <div @click="onLogout" class="logout">Выйти</div>
+          </div>
+        </div>
+        <div class="decor"></div>
+        <div class="decor-second"></div>
+      </nav>   
+    </div> 
 </template>
 
 <script>
@@ -146,6 +155,11 @@ export default {
   z-index: 2;
 }
 
+
+.small-nav-bar {
+  display: none;
+}
+
 .nav-right-box {
   display: flex;
   justify-content: center;
@@ -156,10 +170,14 @@ export default {
 .home-icon {
   height: 1.5rem;
   padding-top: 0.3rem;
-  color: $primary-color-2;
+  color: $secondary-color-2;
   font-size: 1.5rem;
+  transition: 0.5s;
   background: radial-gradient(ellipse at center, rgba(237, 181, 72, 0.1) 0%,
             rgba(237, 181, 72, 0.1) 20%, rgba(237, 181, 72, 0) 70%, rgba(237, 181, 72, 0) 100%);
+  &:hover {
+    color: $primary-color-2;
+  } 
 }
 
 .nav-bar-list {
@@ -171,6 +189,27 @@ export default {
   &:hover {
     color: $primary-color-2;
   } 
+}
+
+.add-news {
+  font-size: 1.2rem;
+  color: $secondary-color-2;
+  font-weight: 600;
+  margin-right: 1.2rem;
+  transition: 0.5s;
+  &:hover {
+    color: #edb548;
+  } 
+}
+
+.active {
+  color: $primary-color-2;
+}
+
+.active-home {
+  color: $primary-color-2;
+  background: radial-gradient(ellipse at center, rgba(237, 181, 72, 0.1) 0%,
+            rgba(237, 181, 72, 0.1) 20%, rgba(237, 181, 72, 0) 70%, rgba(237, 181, 72, 0) 100%);
 }
 
 .add-news {
@@ -227,6 +266,18 @@ export default {
   cursor: pointer;
   &:hover {
     color: rgb(235, 17, 53);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .nav-bar-list {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 789px) {
+  .nav-bar {
+    display: none;
   }
 }
 </style>

@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import home from "~/assets/home"
-import profile from "~/assets/profile"
 import headerTop from "~/components/header-top"
 import footerBottom from "~/components/footer-bottom"
 import navMenu from "~/components/nav-menu"
@@ -25,8 +23,6 @@ import loading from "~/assets/icons/loading"
 
 export default {
   components: {
-    home,
-    profile,
     headerTop,
     footerBottom,
     navMenu,
