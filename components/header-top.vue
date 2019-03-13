@@ -3,7 +3,8 @@
     <img src="/images/kweebec.png" class="header-kweebec" alt="kweebec">
     <div class="header-text">Kweebec</div>
   </header>
-</template>
+</template> 
+
 
 <style lang="scss" scoped>
 .header {
@@ -25,5 +26,11 @@
 
 .header-text {
   margin-right: 6rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .header {
+    display: none;
+  }
 }
 </style>

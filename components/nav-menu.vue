@@ -5,6 +5,9 @@
           <nuxt-link to="/">
             <home class="home-icon" :class="{'active-home': $route.path === '/'}"/>
           </nuxt-link>
+          <div @click="$emit('activeBurger', true)">
+            <burger class="burger-icon"/>
+          </div>
           <nuxt-link v-for="(item, key) in routers" 
                     :to="'/' + item.router" 
                     :key="key" 
@@ -45,11 +48,13 @@
 <script>
 import home from "~/assets/home"
 import profile from "~/assets/profile"
+import burger from "~/assets/icons/burger"
 
 export default {
   components: {
     home,
-    profile
+    profile,
+    burger
   },
   props: {
     routers: Array
@@ -150,9 +155,24 @@ export default {
 }
 
 .nav-lists {
+  display: flex;
   margin-left: 1.5rem;
   margin-bottom: 0.1rem;
   z-index: 2;
+}
+
+.select-list {
+  margin-top: 0.2rem;
+  padding: 0.1rem 0 0 0.4rem;
+  display: none;
+  border: none;
+  background:  $primary-bg-2;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  margin-left: 1rem;
+  font-weight: 600;
+  color: $secondary-color-1;
+  transition: border 0.2s, background 0.2s, box-shadow 0.2s, color 0.2s;
 }
 
 
@@ -250,6 +270,14 @@ export default {
   margin-right: 0.7rem;
 }
 
+.burger-icon {
+  color: $secondary-color-2;
+  display: none;
+  margin-left: 0.9rem;
+  margin-top: .2rem;
+  cursor: pointer;
+}
+
 .profile {
   font-size: 1.2rem;
   font-weight: 300;
@@ -272,6 +300,21 @@ export default {
 @media screen and (max-width: 1200px) {
   .nav-bar-list {
     display: none;
+  }
+  .nav-lists {
+    display: flex;
+    align-items: center;
+  }
+  .burger-icon {
+    display: block;
+  }
+  .nav-bar {
+    border-radius: 0;
+    border: 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  }
+  .sign-button {
+    margin-right: 0.5rem;
   }
 }
 

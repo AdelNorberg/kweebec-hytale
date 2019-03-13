@@ -28,7 +28,7 @@
           <div class="select-form">
             <h3 class="header-text">Категория</h3>
             <select 
-              v-model.trim="formData.category"
+              v-model="formData.category"
               class="input select" 
               type="text"
               placeholder="Введите название...">

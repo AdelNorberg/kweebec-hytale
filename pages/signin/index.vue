@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container-sign">
     <div class="tabs">
       <div class="header">Авторизация</div>
       <nuxt-link class="header" to="/signup">Регистрация</nuxt-link>
@@ -104,14 +104,14 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/var.scss';
 
-.container {
+.container-sign {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 40rem;
-  max-width: 100%;
+  width: 100%;
   background: $primary-bg-2;
   box-shadow: $shadow-bg;
   border-radius: 5px;

@@ -7,9 +7,11 @@
 </template>
 
 <script>
+import loading from '~/assets/icons/loading'
+
 export default {
   components: {
-    loading: () => import('~/assets/icons/loading')
+    loading
   },
   props: {
     active: Boolean

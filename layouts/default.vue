@@ -1,5 +1,6 @@
 <template>
   <div class="default-layout">
+    <burger-menu :active="burgerActive" @activeBurger="onActiveBurger"/>
     <div class="container">
       <transition name="fade">
         <div v-if="$nuxt.isOffline" class="offline">
@@ -8,8 +9,8 @@
         </div>
       </transition>
       <header-top />
-      <nav-menu :routers="routers"/>
-      <nuxt />
+      <nav-menu :routers="routers" @activeBurger="onActiveBurger"/>
+      <nuxt class="nuxt-content"/>
       <footer-bottom />
     </div>
   </div>
@@ -20,13 +21,15 @@ import headerTop from "~/components/header-top"
 import footerBottom from "~/components/footer-bottom"
 import navMenu from "~/components/nav-menu"
 import loading from "~/assets/icons/loading"
+import burgerMenu from "~/components/burger-menu"
 
 export default {
   components: {
     headerTop,
     footerBottom,
     navMenu,
-    loading
+    loading,
+    burgerMenu
   },
   data() {
     return {
@@ -36,7 +39,8 @@ export default {
         { name: 'Карты', router: 'maps' },
         { name: 'Сборки', router: 'assembly' },
         { name: 'Текстуры', router: 'textures' }
-      ]
+      ],
+      burgerActive: false
     }
   },
   computed: {
@@ -50,6 +54,9 @@ export default {
   methods: {
     onLogout() {
       this.$store.dispatch('auth/logout')
+    },
+    onActiveBurger(active) {
+      this.burgerActive = active
     }
   }
 }
@@ -93,6 +100,8 @@ a {
   justify-content: center;
   background: url("/Hytale/new-bg.webp") no-repeat;
   background-size: 115%;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .container {
@@ -121,6 +130,15 @@ a {
 @media screen and (max-width: 1440px) {
   .container {
     min-width: 100%;
+    padding: 0;
+  }
+  .default-layout {
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+  .nuxt-content {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 </style>
