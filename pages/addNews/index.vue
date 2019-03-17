@@ -58,7 +58,9 @@
           <div v-if="errors.errorDesc" class="error">{{ errors.errorDesc }}</div>
         </div>
         <h3 class="header-text">Основное описание</h3>
-        <mavon-editor v-model="formData.content" language="ru" :toolbars="toolbars"/>
+        <no-ssr>
+          <mavon-editor v-model="formData.content" language="ru" :toolbars="toolbars"/>
+        </no-ssr>
         <div v-if="errors.errorContent" class="error margin">{{ errors.errorContent }}</div>
       </div>
       <button class="button" @click="onClickForm">Отправить</button>
