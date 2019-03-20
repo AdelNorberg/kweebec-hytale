@@ -1,6 +1,6 @@
 <template>
   <div class="default-layout">
-    <burger-menu :active="burgerActive" @activeBurger="onActiveBurger"/>
+    <burger-menu :active="burgerActive" @activeBurger="onActiveBurger" :routers="routers"/>
     <div class="container">
       <transition name="fade">
         <div v-if="$nuxt.isOffline" class="offline">

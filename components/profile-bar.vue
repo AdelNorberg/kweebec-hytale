@@ -73,5 +73,4 @@ export default {
 .email {
   font-weight: 300;
 }
-
 </style>

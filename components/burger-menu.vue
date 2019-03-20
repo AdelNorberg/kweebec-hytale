@@ -8,6 +8,15 @@
         <img src="/images/kweebec.png" class="header-kweebec" alt="kweebec">
         <div class="header-text">Kweebec</div>
       </div>
+      <div class="nav-lists">
+        <nuxt-link v-for="(item, key) in routers" 
+                  :to="'/' + item.router" 
+                  :key="key" 
+                  :class="{active: $route.name === item.router}" 
+                  class="nav-bar-list">
+          {{ item.name }}
+        </nuxt-link>
+      </div>
     </div>
   </transition>
 </template>
@@ -22,7 +31,8 @@ export default {
     arrowLeft
   },
   props: {
-    active: Boolean
+    active: Boolean,
+    routers: Array
   }
 }
 </script>
@@ -69,5 +79,13 @@ export default {
 .header-kweebec {
   border: none;
   width: 5rem;
+}
+
+.nav-lists {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.5rem;
+  margin-bottom: 0.1rem;
+  z-index: 2;
 }
 </style>

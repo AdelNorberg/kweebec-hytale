@@ -317,10 +317,4 @@ export default {
     margin-right: 0.5rem;
   }
 }
-
-@media screen and (max-width: 789px) {
-  .nav-bar {
-    display: none;
-  }
-}
 </style>
